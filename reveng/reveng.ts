@@ -1,12 +1,12 @@
-import {calculateChampions} from './calc/src/mechanics/champions';
-import { Generations } from "./calc/src/data";
+import {calculateChampions} from '../calc/src/mechanics/champions';
+import { Generations } from "../calc/src/data";
 import { Dex, StatsTable } from '@pkmn/dex';
-import { Pokemon } from "./calc/src";
-import { Move } from './calc/src';
-import { Field } from "./calc/src";
+import { Pokemon } from "../calc/src";
+import { Move } from '../calc/src';
+import { Field } from "../calc/src";
 import { Weather } from '@pkmn/dex';
-import type * as I from './calc/src/data';
-import { calcStat } from './calc/src';
+import type * as I from '../calc/src/data';
+import { calcStat } from '../calc/src';
 
 const gen = Generations.get(0);
 const boardState = new Field(

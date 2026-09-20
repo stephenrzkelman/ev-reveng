@@ -1,9 +1,9 @@
-import { Generations } from "./calc/src/data";
+import { Generations } from "../calc/src/data";
 import { StatsTable } from '@pkmn/dex';
-import { Pokemon } from "./calc/src";
-import { Move } from './calc/src';
-import { Field } from "./calc/src";
-import { calcStat } from './calc/src';
+import { Pokemon } from "../calc/src";
+import { Move } from '../calc/src';
+import { Field } from "../calc/src";
+import { calcStat } from '../calc/src';
 import { 
     AugmentedMon,
     move_eliminateImpossibleEvSpreads,
