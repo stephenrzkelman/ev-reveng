@@ -1,0 +1,324 @@
+30977 total possible defensive spreads
+=======================================================================================
+Rillaboom about to attack Aerodactyl with Grassy Glide
+1 possible attack EVs for Rillaboom
+1 possible def spreads for Aerodactyl
+Rillaboom just attacked Aerodactyl with Grassy Glide
+1 possible attack EVs for Rillaboom
+1 possible def spreads for Aerodactyl
+1 possible def spreads for Rillaboom
+=======================================================================================
+=======================================================================================
+Charizard-Mega-Y about to attack Sneasler with Heat Wave
+2 possible attack EVs for Charizard-Mega-Y
+30977 possible def spreads for Sneasler
+Charizard-Mega-Y just attacked Sneasler with Heat Wave
+2 possible attack EVs for Charizard-Mega-Y
+16398 possible def spreads for Sneasler
+30977 possible def spreads for Charizard-Mega-Y
+=======================================================================================
+=======================================================================================
+Charizard-Mega-Y about to attack Kommo-o with Heat Wave
+2 possible attack EVs for Charizard-Mega-Y
+1 possible def spreads for Kommo-o
+Charizard-Mega-Y just attacked Kommo-o with Heat Wave
+1 possible attack EVs for Charizard-Mega-Y
+1 possible def spreads for Kommo-o
+30977 possible def spreads for Charizard-Mega-Y
+=======================================================================================
+=======================================================================================
+Sneasler about to heal 1/16 HP
+16398 possible def spreads for Sneasler
+Sneasler just healed 1/16 HP
+15683 possible def spreads for Sneasler
+=======================================================================================
+=======================================================================================
+Kommo-o about to heal 1/16 HP
+1 possible def spreads for Kommo-o
+Kommo-o just healed 1/16 HP
+1 possible def spreads for Kommo-o
+=======================================================================================
+=======================================================================================
+Kommo-o about to heal 1/16 HP
+1 possible def spreads for Kommo-o
+Kommo-o just healed 1/16 HP
+1 possible def spreads for Kommo-o
+=======================================================================================
+=======================================================================================
+Charizard-Mega-Y about to attack Kommo-o with Heat Wave
+1 possible attack EVs for Charizard-Mega-Y
+1 possible def spreads for Kommo-o
+Charizard-Mega-Y just attacked Kommo-o with Heat Wave
+1 possible attack EVs for Charizard-Mega-Y
+1 possible def spreads for Kommo-o
+30977 possible def spreads for Charizard-Mega-Y
+=======================================================================================
+=======================================================================================
+Kommo-o about to do 1/3 HP self-damage
+1 possible def spreads for Kommo-o
+Kommo-o just did 1/3 HP self-damage
+1 possible def spreads for Kommo-o
+=======================================================================================
+=======================================================================================
+Sneasler about to heal 1/16 HP
+15683 possible def spreads for Sneasler
+Sneasler just healed 1/16 HP
+12483 possible def spreads for Sneasler
+=======================================================================================
+=======================================================================================
+Kommo-o about to heal 1/16 HP
+1 possible def spreads for Kommo-o
+Kommo-o just healed 1/16 HP
+1 possible def spreads for Kommo-o
+=======================================================================================
+=======================================================================================
+Kommo-o about to heal 1/16 HP
+1 possible def spreads for Kommo-o
+Kommo-o just healed 1/16 HP
+1 possible def spreads for Kommo-o
+=======================================================================================
+=======================================================================================
+Charizard-Mega-Y about to attack Incineroar with Heat Wave
+1 possible attack EVs for Charizard-Mega-Y
+3 possible def spreads for Incineroar
+Charizard-Mega-Y just attacked Incineroar with Heat Wave
+1 possible attack EVs for Charizard-Mega-Y
+3 possible def spreads for Incineroar
+30977 possible def spreads for Charizard-Mega-Y
+=======================================================================================
+=======================================================================================
+Kommo-o about to heal 1/16 HP
+1 possible def spreads for Kommo-o
+Kommo-o just healed 1/16 HP
+1 possible def spreads for Kommo-o
+=======================================================================================
+=======================================================================================
+Incineroar about to heal 1/16 HP
+3 possible def spreads for Incineroar
+Incineroar just healed 1/16 HP
+3 possible def spreads for Incineroar
+=======================================================================================
+=======================================================================================
+Kommo-o about to heal 1/16 HP
+1 possible def spreads for Kommo-o
+Kommo-o just healed 1/16 HP
+1 possible def spreads for Kommo-o
+=======================================================================================
+=======================================================================================
+Aerodactyl about to attack Incineroar with Rock Slide
+1 possible attack EVs for Aerodactyl
+3 possible def spreads for Incineroar
+Aerodactyl just attacked Incineroar with Rock Slide
+1 possible attack EVs for Aerodactyl
+3 possible def spreads for Incineroar
+1 possible def spreads for Aerodactyl
+=======================================================================================
+=======================================================================================
+Aerodactyl about to attack Kommo-o with Rock Slide
+1 possible attack EVs for Aerodactyl
+1 possible def spreads for Kommo-o
+Aerodactyl just attacked Kommo-o with Rock Slide
+1 possible attack EVs for Aerodactyl
+1 possible def spreads for Kommo-o
+1 possible def spreads for Aerodactyl
+=======================================================================================
+=======================================================================================
+Kommo-o about to attack Aerodactyl with Aura Sphere
+1 possible attack EVs for Kommo-o
+1 possible def spreads for Aerodactyl
+Kommo-o just attacked Aerodactyl with Aura Sphere
+1 possible attack EVs for Kommo-o
+1 possible def spreads for Aerodactyl
+1 possible def spreads for Kommo-o
+=======================================================================================
+=======================================================================================
+Kommo-o about to heal 1/16 HP
+1 possible def spreads for Kommo-o
+Kommo-o just healed 1/16 HP
+1 possible def spreads for Kommo-o
+=======================================================================================
+=======================================================================================
+Garchomp about to attack Rillaboom with Earthquake
+33 possible attack EVs for Garchomp
+1 possible def spreads for Rillaboom
+Garchomp just attacked Rillaboom with Earthquake
+32 possible attack EVs for Garchomp
+1 possible def spreads for Rillaboom
+30977 possible def spreads for Garchomp
+=======================================================================================
+=======================================================================================
+Charizard-Mega-Y about to attack Incineroar with Heat Wave
+1 possible attack EVs for Charizard-Mega-Y
+3 possible def spreads for Incineroar
+Charizard-Mega-Y just attacked Incineroar with Heat Wave
+1 possible attack EVs for Charizard-Mega-Y
+3 possible def spreads for Incineroar
+30977 possible def spreads for Charizard-Mega-Y
+=======================================================================================
+=======================================================================================
+Incineroar about to heal 1/4 HP
+3 possible def spreads for Incineroar
+Incineroar just healed 1/4 HP
+3 possible def spreads for Incineroar
+=======================================================================================
+=======================================================================================
+Kommo-o about to heal 1/16 HP
+1 possible def spreads for Kommo-o
+Kommo-o just healed 1/16 HP
+1 possible def spreads for Kommo-o
+=======================================================================================
+=======================================================================================
+Incineroar about to heal 1/16 HP
+3 possible def spreads for Incineroar
+Incineroar just healed 1/16 HP
+3 possible def spreads for Incineroar
+=======================================================================================
+=======================================================================================
+Kommo-o about to heal 1/16 HP
+1 possible def spreads for Kommo-o
+Kommo-o just healed 1/16 HP
+1 possible def spreads for Kommo-o
+=======================================================================================
+=======================================================================================
+Kommo-o about to attack Kingambit with Clanging Scales
+1 possible attack EVs for Kommo-o
+1 possible def spreads for Kingambit
+Kommo-o just attacked Kingambit with Clanging Scales
+1 possible attack EVs for Kommo-o
+1 possible def spreads for Kingambit
+1 possible def spreads for Kommo-o
+=======================================================================================
+=======================================================================================
+Incineroar about to attack Kingambit with Flare Blitz
+1 possible attack EVs for Incineroar
+1 possible def spreads for Kingambit
+Incineroar just attacked Kingambit with Flare Blitz
+1 possible attack EVs for Incineroar
+1 possible def spreads for Kingambit
+3 possible def spreads for Incineroar
+=======================================================================================
+=======================================================================================
+Kommo-o about to heal 1/16 HP
+1 possible def spreads for Kommo-o
+Kommo-o just healed 1/16 HP
+1 possible def spreads for Kommo-o
+=======================================================================================
+=======================================================================================
+Kingambit about to heal 1/16 HP
+1 possible def spreads for Kingambit
+Kingambit just healed 1/16 HP
+1 possible def spreads for Kingambit
+=======================================================================================
+=======================================================================================
+Incineroar about to heal 1/16 HP
+3 possible def spreads for Incineroar
+Incineroar just healed 1/16 HP
+3 possible def spreads for Incineroar
+=======================================================================================
+=======================================================================================
+Kommo-o about to heal 1/16 HP
+1 possible def spreads for Kommo-o
+Kommo-o just healed 1/16 HP
+1 possible def spreads for Kommo-o
+=======================================================================================
+=======================================================================================
+Kommo-o about to attack Kingambit with Clanging Scales
+1 possible attack EVs for Kommo-o
+1 possible def spreads for Kingambit
+Kommo-o just attacked Kingambit with Clanging Scales
+1 possible attack EVs for Kommo-o
+1 possible def spreads for Kingambit
+1 possible def spreads for Kommo-o
+=======================================================================================
+=======================================================================================
+Kommo-o about to attack Garchomp with Clanging Scales
+1 possible attack EVs for Kommo-o
+30977 possible def spreads for Garchomp
+Kommo-o just attacked Garchomp with Clanging Scales
+1 possible attack EVs for Kommo-o
+29902 possible def spreads for Garchomp
+1 possible def spreads for Kommo-o
+=======================================================================================
+=======================================================================================
+Kommo-o about to heal 1/16 HP
+1 possible def spreads for Kommo-o
+Kommo-o just healed 1/16 HP
+1 possible def spreads for Kommo-o
+=======================================================================================
+=======================================================================================
+Sneasler about to heal 1/16 HP
+12483 possible def spreads for Sneasler
+Sneasler just healed 1/16 HP
+10682 possible def spreads for Sneasler
+=======================================================================================
+=======================================================================================
+Kommo-o about to heal 1/16 HP
+1 possible def spreads for Kommo-o
+Kommo-o just healed 1/16 HP
+1 possible def spreads for Kommo-o
+=======================================================================================
+=======================================================================================
+Incineroar about to attack Kingambit with Fake Out
+1 possible attack EVs for Incineroar
+1 possible def spreads for Kingambit
+Incineroar just attacked Kingambit with Fake Out
+1 possible attack EVs for Incineroar
+1 possible def spreads for Kingambit
+3 possible def spreads for Incineroar
+=======================================================================================
+=======================================================================================
+Garchomp about to attack Incineroar with Stomping Tantrum
+32 possible attack EVs for Garchomp
+3 possible def spreads for Incineroar
+Garchomp just attacked Incineroar with Stomping Tantrum
+30 possible attack EVs for Garchomp
+3 possible def spreads for Incineroar
+29902 possible def spreads for Garchomp
+=======================================================================================
+=======================================================================================
+Garchomp about to attack Incineroar with Stomping Tantrum
+30 possible attack EVs for Garchomp
+3 possible def spreads for Incineroar
+Garchomp just attacked Incineroar with Stomping Tantrum
+18 possible attack EVs for Garchomp
+3 possible def spreads for Incineroar
+29902 possible def spreads for Garchomp
+=======================================================================================
+=======================================================================================
+Incineroar about to heal 1/4 HP
+3 possible def spreads for Incineroar
+Incineroar just healed 1/4 HP
+3 possible def spreads for Incineroar
+=======================================================================================
+=======================================================================================
+Kingambit about to attack Rillaboom with Kowtow Cleave
+1 possible attack EVs for Kingambit
+1 possible def spreads for Rillaboom
+Kingambit just attacked Rillaboom with Kowtow Cleave
+1 possible attack EVs for Kingambit
+1 possible def spreads for Rillaboom
+1 possible def spreads for Kingambit
+=======================================================================================
+=======================================================================================
+Gardevoir-Mega about to attack Gengar-Mega with Expanding Force
+33 possible attack EVs for Gardevoir-Mega
+30977 possible def spreads for Gengar-Mega
+Gardevoir-Mega just attacked Gengar-Mega with Expanding Force
+33 possible attack EVs for Gardevoir-Mega
+30977 possible def spreads for Gengar-Mega
+30977 possible def spreads for Gardevoir-Mega
+=======================================================================================
+=======================================================================================
+Gardevoir-Mega about to attack Incineroar with Hyper Voice
+33 possible attack EVs for Gardevoir-Mega
+3 possible def spreads for Incineroar
+Gardevoir-Mega just attacked Incineroar with Hyper Voice
+33 possible attack EVs for Gardevoir-Mega
+3 possible def spreads for Incineroar
+30977 possible def spreads for Gardevoir-Mega
+=======================================================================================
+Kommo-o has  1  possible defensive spreads
+Sneasler has  10682  possible defensive spreads
+Rillaboom has  1  possible defensive spreads
+Incineroar has  3  possible defensive spreads
+0
