@@ -1,4 +1,22 @@
-# Pokémon Damage Calculator
+# ~~Pokémon Damage Calculator~~ EV Reverse Engineering Tool
+
+This is my attempt to make a tool that can:
+- take as input: a Pokemon Champions VGC battle log, and
+- provide as output: (guesses of) the EV spreads for the Pokemon involved.
+
+Of course, a damage calculator is essential for this, but I didn't want to bother building my own.
+So I am building this on top of the Smogon Pokemon Damage Calculator.
+Besides some minor changes to the root-level config files, only the work in the `reveng/` folder is my own.
+
+## Some Notes
+From the minor experimentation that I have done, this seems to work best when:
+1. you already know the spreads for one or more pokemon (i.e. your own, or obvious sets like sash aerodactyl)
+2. the pokemon involved go through lots of HP changes (small attacks, healing, self-/recoil damage)
+    - Starting from all 30K+ possible defensive EV spreads, I was able to narrow down a Kommo-o set to 171 possible defensive spreads. With some manual inspection, it was very easy to figure out from these 171 what the actual stat spread on the Kommo-o was.
+    - This was possible because the game in question had Kommo-o sitting on the field through many turns of terrain/leftovers recovery, clangorous soul, and lots of small hits from enemies.
+    - On the other hand, Sneasler was on the field much less frequently and generally took large amounts of damage at a time (and as a result, it interacted with fewer opponents, defensively speaking). So, I was only able to narrow its possible defensive spreads to ~10K of all 30K possible sets.
+
+# \*\***Everything below this point is from the original Smogon Calculator README**\*\*
 
 ![Test Status](https://github.com/smogon/damage-calc/workflows/Tests/badge.svg)
 [![npm version](https://img.shields.io/npm/v/@smogon/calc.svg)](https://www.npmjs.com/package/@smogon/calc)&nbsp;
