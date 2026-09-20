@@ -1,0 +1,46 @@
+30977 total possible defensive spreads
+#########################################
+################# GAME 1 ################
+#########################################
+=======================================================================================
+Rillaboom about to attack Aerodactyl with Grassy Glide
+33 possible attack EVs for Rillaboom
+1 possible def spreads for Aerodactyl
+not here
+not here
+not here
+not here
+not here
+not here
+not here
+not here
+not here
+not here
+not here
+not here
+not here
+not here
+not here
+Rillaboom just attacked Aerodactyl with Grassy Glide
+16 possible attack EVs for Rillaboom
+1 possible def spreads for Aerodactyl
+=======================================================================================
+=======================================================================================
+Charizard-Mega-Y about to attack Sneasler with Heat Wave
+2 possible attack EVs for Charizard-Mega-Y
+30977 possible def spreads for Sneasler
+Charizard-Mega-Y just attacked Sneasler with Heat Wave
+0 possible attack EVs for Charizard-Mega-Y
+28799 possible def spreads for Sneasler
+=======================================================================================
+=======================================================================================
+Charizard-Mega-Y about to attack Kommo-o with Heat Wave
+0 possible attack EVs for Charizard-Mega-Y
+30977 possible def spreads for Kommo-o
+Charizard-Mega-Y just attacked Kommo-o with Heat Wave
+0 possible attack EVs for Charizard-Mega-Y
+28799 possible def spreads for Kommo-o
+=======================================================================================
+=======================================================================================
+Sneasler about to heal 1/16 HP
+28799 possible def spreads for Sneasler
