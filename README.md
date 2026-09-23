@@ -12,9 +12,12 @@ Besides some minor changes to the root-level config files, only the work in the 
 From the minor experimentation that I have done, this seems to work best when:
 1. you already know the spreads for one or more pokemon (i.e. your own, or obvious sets like sash aerodactyl)
 2. the pokemon involved go through lots of HP changes (small attacks, healing, self-/recoil damage)
-    - Starting from all 30K+ possible defensive EV spreads, I was able to narrow down a Kommo-o set to 171 possible defensive spreads. With some manual inspection, it was very easy to figure out from these 171 what the actual stat spread on the Kommo-o was.
+    - Starting from all 30K+ possible defensive EV spreads, I was able to narrow down a Kommo-o set to 171 possible defensive spreads. With some manual inspection, it was very easy to figure out from these 171 what the actual stat spread on the Kommo-o was. (it is no coincidence that 171 = 9 \* 19; the 171 possible spreads were hp=10, def={0..18}, spd={0..8}. Kind of just an interesting artifact that the Kommo-o could have gotten away with as little as 0 defensive EV's in this particular matchup.)
     - This was possible because the game in question had Kommo-o sitting on the field through many turns of terrain/leftovers recovery, clangorous soul, and lots of small hits from enemies.
     - On the other hand, Sneasler was on the field much less frequently and generally took large amounts of damage at a time (and as a result, it interacted with fewer opponents, defensively speaking). So, I was only able to narrow its possible defensive spreads to ~10K of all 30K possible sets.
+3. Fixed-amount HP changes are possibly the most useful for narrowing down EV spreads.
+    - While they don't give any information about Defense or Special Defense, they can often really help narrow down the HP. This makes reverse engineering EV's much easier with grassy terrain running around. Once HP is narrowed down, the defense stats are easier to pin down from actual damage interactions.
+    - It was basically the combination of Leftovers and Grassy Terrain alone that narrowed down Kommo-o's stat spread to 171 possibilities in the Baltimore regional match I analyzed. I have yet to see whether this will work as well in general, but one main point of interest when I was watching the stream was that Kommo-o often went up by 7% from these healing sources, which narrows down the possibilities quite a bit. This turned out to be likely due to the EV training hitting a multiple of 16 for HP, so I'm not sure if the results would have turned out as well for a different mon without such precise EV's.
 
 # \*\***Everything below this point is from the original Smogon Calculator README**\*\*
 
