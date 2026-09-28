@@ -105,7 +105,7 @@ function recoil_findPossibleHpInvestments(attacker: AugmentedMon, recoilFactor: 
     return validHpInvestments;
 }
 
-function move_eliminateImpossibleEvSpreads(
+function move(
     attacker: AugmentedMon,
     defender: AugmentedMon,
     move: Move,
@@ -227,7 +227,7 @@ function move_eliminateImpossibleEvSpreads(
     console.log("=======================================================================================")
 }
 
-function heal_eliminateImpossibleEvSpreads(augmentedMon: AugmentedMon, targetHpPct: number, logHealAmt: number){
+function heal(augmentedMon: AugmentedMon, targetHpPct: number, logHealAmt: number){
     let newPossibleSpreads = new Map<StatsTable<number>, Set<number>>();
     let pokemon = augmentedMon.pokemon;
     console.log("=======================================================================================")
@@ -254,7 +254,7 @@ function heal_eliminateImpossibleEvSpreads(augmentedMon: AugmentedMon, targetHpP
     console.log("=======================================================================================")
 }
 
-function selfdmg_eliminateImpossibleEvSpreads(augmentedMon: AugmentedMon, targetHpPct: number, selfDmgFactor: number){
+function selfdmg(augmentedMon: AugmentedMon, targetHpPct: number, selfDmgFactor: number){
     let newPossibleSpreads = new Map<StatsTable<number>, Set<number>>();
     let pokemon = augmentedMon.pokemon;
     console.log("=======================================================================================")
@@ -450,72 +450,72 @@ let battleLog = [
     (() => boardState.terrain='Grassy'),
     // Charizard mega evolves
     (() => boardState.weather='Sun'),
-    () => move_eliminateImpossibleEvSpreads(team2.Rilla, team1.Aero, new Move(gen, 'Grassy Glide'), 54),
-    () => move_eliminateImpossibleEvSpreads(team1.Zard, team2.Sneasler, HW, 29),
-    () => move_eliminateImpossibleEvSpreads(team1.Zard, team2['Kommo-o'], HW, 66),
+    () => move(team2.Rilla, team1.Aero, new Move(gen, 'Grassy Glide'), 54),
+    () => move(team1.Zard, team2.Sneasler, HW, 29),
+    () => move(team1.Zard, team2['Kommo-o'], HW, 66),
     // Terrain
-    () => heal_eliminateImpossibleEvSpreads(team2['Sneasler'], 35, 4),
-    () => heal_eliminateImpossibleEvSpreads(team2['Kommo-o'], 73, 4),
+    () => heal(team2['Sneasler'], 35, 4),
+    () => heal(team2['Kommo-o'], 73, 4),
     // Leftovers
-    () => heal_eliminateImpossibleEvSpreads(team2['Kommo-o'], 79, 4),
-    () => move_eliminateImpossibleEvSpreads(team1.Zard, team2['Kommo-o'], HW, 47),
+    () => heal(team2['Kommo-o'], 79, 4),
+    () => move(team1.Zard, team2['Kommo-o'], HW, 47),
     // Clangorous Soul
-    () => selfdmg_eliminateImpossibleEvSpreads(team2['Kommo-o'], 14, 3),
+    () => selfdmg(team2['Kommo-o'], 14, 3),
     () => team2['Kommo-o'].pokemon.boosts = {hp: 0, atk:1, def: 1, spa: 1, spd: 1, spe: 1},
     // Terrain
-    () => heal_eliminateImpossibleEvSpreads(team2['Sneasler'], 41, 4),
-    () => heal_eliminateImpossibleEvSpreads(team2['Kommo-o'], 20, 4),
+    () => heal(team2['Sneasler'], 41, 4),
+    () => heal(team2['Kommo-o'], 20, 4),
     // Leftovers
-    () => heal_eliminateImpossibleEvSpreads(team2['Kommo-o'], 26, 4),
+    () => heal(team2['Kommo-o'], 26, 4),
     // Incin switches in
     () => team1.Zard.pokemon.boosts.atk -= 1,
     () => team1.Aero.pokemon.boosts.atk -= 1,
-    () => move_eliminateImpossibleEvSpreads(team1.Zard, team2.Incin, HW, 77),
+    () => move(team1.Zard, team2.Incin, HW, 77),
     // Terrain
-    () => heal_eliminateImpossibleEvSpreads(team2['Kommo-o'], 33, 4),
-    () => heal_eliminateImpossibleEvSpreads(team2['Incin'], 83, 4),
+    () => heal(team2['Kommo-o'], 33, 4),
+    () => heal(team2['Incin'], 83, 4),
     // Lefties
-    () => heal_eliminateImpossibleEvSpreads(team2['Kommo-o'], 39, 4),
+    () => heal(team2['Kommo-o'], 39, 4),
     // Terrain Ends
     () => boardState.terrain = undefined,
-    () => move_eliminateImpossibleEvSpreads(team1.Aero, team2.Incin, RS, 55),
-    () => move_eliminateImpossibleEvSpreads(team1.Aero, team2['Kommo-o'], RS, 33),
-    () => move_eliminateImpossibleEvSpreads(team2['Kommo-o'], team1.Aero, new Move(gen, 'Aura Sphere'), 0),
+    () => move(team1.Aero, team2.Incin, RS, 55),
+    () => move(team1.Aero, team2['Kommo-o'], RS, 33),
+    () => move(team2['Kommo-o'], team1.Aero, new Move(gen, 'Aura Sphere'), 0),
     // Lefties
-    () => heal_eliminateImpossibleEvSpreads(team2['Kommo-o'], 40, 4),
+    () => heal(team2['Kommo-o'], 40, 4),
     // Sun Ends
     () => boardState.weather = undefined,
     // Rilla swaps in
     () => boardState.terrain = 'Grassy',
-    () => move_eliminateImpossibleEvSpreads(team1.Chomp, team2.Rilla, new Move(gen, 'Earthquake'), 92),
+    () => move(team1.Chomp, team2.Rilla, new Move(gen, 'Earthquake'), 92),
     // Eject button ==> incin
     () => team1.Chomp.pokemon.boosts.atk -= 1,
     () => team1.Zard.pokemon.boosts.atk -= 1,
-    () => move_eliminateImpossibleEvSpreads(team1.Zard, team2.Incin, HW, 39),
+    () => move(team1.Zard, team2.Incin, HW, 39),
     // Sitrus
-    () => heal_eliminateImpossibleEvSpreads(team2.Incin, 64, 2),
+    () => heal(team2.Incin, 64, 2),
     // Terrain
-    () => heal_eliminateImpossibleEvSpreads(team2['Kommo-o'], 46, 4),
-    () => heal_eliminateImpossibleEvSpreads(team2.Incin, 70, 4),
+    () => heal(team2['Kommo-o'], 46, 4),
+    () => heal(team2.Incin, 70, 4),
     // Lefties
-    () => heal_eliminateImpossibleEvSpreads(team2['Kommo-o'], 52, 4),
-    () => move_eliminateImpossibleEvSpreads(team2['Kommo-o'], team1.Kingambit, ClangScale, 73),
+    () => heal(team2['Kommo-o'], 52, 4),
+    () => move(team2['Kommo-o'], team1.Kingambit, ClangScale, 73),
     () => team2['Kommo-o'].pokemon.boosts.def -= 1,
-    () => move_eliminateImpossibleEvSpreads(team2.Incin, team1.Kingambit, new Move(gen, 'Flare Blitz'), 8, true, 3, 48),
+    () => move(team2.Incin, team1.Kingambit, new Move(gen, 'Flare Blitz'), 8, true, 3, 48),
     // Terrain
-    () => heal_eliminateImpossibleEvSpreads(team2['Kommo-o'], 58, 4),
-    () => heal_eliminateImpossibleEvSpreads(team1.Kingambit, 14, 4),
-    () => heal_eliminateImpossibleEvSpreads(team2.Incin, 54, 4),
+    () => heal(team2['Kommo-o'], 58, 4),
+    () => heal(team1.Kingambit, 14, 4),
+    () => heal(team2.Incin, 54, 4),
     // Lefties
-    () => heal_eliminateImpossibleEvSpreads(team2['Kommo-o'], 65, 4),
-    () => move_eliminateImpossibleEvSpreads(team2['Kommo-o'], team1.Kingambit, ClangScale, 0),
-    () => move_eliminateImpossibleEvSpreads(team2['Kommo-o'], team1.Chomp, ClangScale, 0),
+    () => heal(team2['Kommo-o'], 65, 4),
+    () => move(team2['Kommo-o'], team1.Kingambit, ClangScale, 0),
+    () => move(team2['Kommo-o'], team1.Chomp, ClangScale, 0),
     () => team2['Kommo-o'].pokemon.boosts.def -= 1,
     // Terrain
-    () => heal_eliminateImpossibleEvSpreads(team2['Kommo-o'], 71, 4),
-    () => heal_eliminateImpossibleEvSpreads(team2.Sneasler, 47, 4),
+    () => heal(team2['Kommo-o'], 71, 4),
+    () => heal(team2.Sneasler, 47, 4),
     // Lefties
-    () => heal_eliminateImpossibleEvSpreads(team2['Kommo-o'], 77, 4),
+    () => heal(team2['Kommo-o'], 77, 4),
 ]
 let game2Log = [
     // Intimidate
@@ -523,13 +523,13 @@ let game2Log = [
     () => team1.Chomp.pokemon.boosts.atk -= 1,
     // Defiant
     () => team1.Kingambit.pokemon.boosts.atk += 2,
-    () => move_eliminateImpossibleEvSpreads(team2.Incin, team1.Kingambit, FO, 95),
-    () => move_eliminateImpossibleEvSpreads(team1.Chomp, team2.Incin, Stomp, 61),// false, undefined, undefined, true),
+    () => move(team2.Incin, team1.Kingambit, FO, 95),
+    () => move(team1.Chomp, team2.Incin, Stomp, 61),// false, undefined, undefined, true),
     // Rillaboom in
     () => boardState.terrain = 'Grassy',
-    () => move_eliminateImpossibleEvSpreads(team1.Chomp, team2.Incin, Stomp, 25),
-    () => heal_eliminateImpossibleEvSpreads(team2.Incin, 50, 2),
-    () => move_eliminateImpossibleEvSpreads(team1.Kingambit, team2.Rilla, Kowtow, 34),
+    () => move(team1.Chomp, team2.Incin, Stomp, 25),
+    () => heal(team2.Incin, 50, 2),
+    () => move(team1.Kingambit, team2.Rilla, Kowtow, 34),
     // Parting Shot
     () => team1.Kingambit.pokemon.boosts.atk -= 1,
     () => team1.Kingambit.pokemon.boosts.atk += 2,
@@ -540,10 +540,10 @@ let game2Log = [
     // Incin in, intimidate
     () => team1.Gard.pokemon.boosts.atk -= 1,
     () => team1.Indeedee.pokemon.boosts.atk -= 1,
-    () => move_eliminateImpossibleEvSpreads(team1.Gard, team2.Gengar, EForce, 0),
+    () => move(team1.Gard, team2.Gengar, EForce, 0),
     // Helping hand Hyper Voice
     () => boardState.attackerSide.isHelpingHand = true,
-    () => move_eliminateImpossibleEvSpreads(team1.Gard, team2.Incin, HVoice, 0),
+    () => move(team1.Gard, team2.Incin, HVoice, 0),
     () => boardState.attackerSide.isHelpingHand = false,
 ];
 
