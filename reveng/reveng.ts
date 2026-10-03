@@ -7,42 +7,82 @@ import type * as I from '../calc/src/data';
 
 export const gen = Generations.get(0);
 
-const allPotentialDefensiveSpreads = new Set<StatsTable<number>>();
-for(let hp = 0; hp <= 32; hp += 1){
-    for(let def = 0; def <= Math.min(32, 66-(hp)); def += 1){
-        for(let spd = 0; spd <= Math.min(32, 66-(hp+def)); spd += 1){
-            allPotentialDefensiveSpreads.add({hp: hp, atk: 0, def: def, spa: 0, spd: spd, spe: 0});
-        }
-    }
-};
-console.log(`${allPotentialDefensiveSpreads.size} total possible defensive spreads`);
+type Range = {
+    lo: number,
+    hi: number
+}
+
+export function range(lo: number, hi: number){
+    return {lo: lo, hi: hi};
+}
+
+type PossibleBulk = {
+    totalHp: number,
+    remainingHp: Set<number>,
+    spd: Set<number>,
+    def: Set<number>
+}
+
+type PossibleOffense = {
+    atk: Set<number>,
+    spa: Set<number>
+}
+
+function totalDefensiveSpreadCount(mon: AugmentedMon, statName: 'spd' | 'def') {
+    return Array.from(mon.possibleBulkInvestment.values()).reduce((sum, fullBulkData) => sum + fullBulkData[statName].size, 0)
+}
 
 export class AugmentedMon{
     pokemon: Pokemon;
-    possibleDefensiveSpreads: Map<StatsTable<number>, Set<number>>;
-    possibleAttackEvs: Set<number>;
-    constructor(pokemon: Pokemon, possibleDefensiveSpreads?: Map<StatsTable<number>, Set<number>>, possibleAttackEvs?: Set<number>){
+    possibleBulkInvestment: Map<number, PossibleBulk>;
+    possibleOffensiveInvestment: PossibleOffense;
+    constructor(pokemon: Pokemon, evs: Partial<StatsTable<number | number[] | Range>> = {}){
         this.pokemon = pokemon;
-        this.possibleDefensiveSpreads = possibleDefensiveSpreads || new Map<StatsTable<number>, Set<number>>();
-        this.possibleAttackEvs = possibleAttackEvs || new Set<number>();
-        if(this.possibleDefensiveSpreads.size === 0) {
-            for(const evSpread of allPotentialDefensiveSpreads){
-                pokemon.evs = evSpread;
-                this.possibleDefensiveSpreads.set(evSpread, new Set<number>([
-                    calcStat(gen, 'hp', pokemon.species.baseStats.hp, pokemon.ivs.hp, pokemon.evs.hp, pokemon.level, pokemon.nature)
-                ]));
+        function getEvPossibilities(statName: string){
+            let evPossibilities = new Set<number>();
+            if(statName in evs){
+                let stat = statName as keyof Partial<StatsTable<number | number[] | Range>>;
+                if (typeof evs[stat] === 'number') {
+                    evPossibilities.add(evs[stat])
+                }
+                else if (Array.isArray(evs[stat])) {
+                    for(const possibleEv of evs[stat]) {
+                        evPossibilities.add(possibleEv)
+                    }
+                }
+                else {
+                    for(let possibleEv = evs[stat]!.lo; possibleEv <= evs[stat]!.hi; possibleEv++) {
+                        evPossibilities.add(possibleEv);
+                    }
+                }
             }
+            else {
+                for(let possibleEv = 0; possibleEv <= 32; possibleEv++) {
+                    evPossibilities.add(possibleEv);
+                }
+            }
+            return evPossibilities;
         }
-        if(this.possibleAttackEvs.size === 0){
-            for(let possibleAttackEv = 0; possibleAttackEv <= 32; possibleAttackEv += 1){
-                this.possibleAttackEvs.add(possibleAttackEv);
-            }
+        this.possibleOffensiveInvestment = {
+            atk: getEvPossibilities('atk'),
+            spa: getEvPossibilities('spa')
+        };
+        this.possibleBulkInvestment = new Map<number, PossibleBulk>();
+        let possibleDefEvs = getEvPossibilities('def');
+        let possibleSpdEvs = getEvPossibilities('spd');
+        let possibleHpEvs = getEvPossibilities('hp');
+        for(const possibleHpEv of possibleHpEvs) {
+            this.possibleBulkInvestment.set(possibleHpEv, {
+                totalHp: calcStat(gen, 'hp', pokemon.species.baseStats.hp, pokemon.ivs.hp, possibleHpEv, pokemon.level, pokemon.nature),
+                remainingHp: new Set([calcStat(gen, 'hp', pokemon.species.baseStats.hp, pokemon.ivs.hp, possibleHpEv, pokemon.level, pokemon.nature)]),
+                def: new Set(possibleDefEvs),
+                spd: new Set(possibleSpdEvs)
+            });
         }
     }
 }
 
-function getPossibleResHps(move: Move, attacker: Pokemon, defender: Pokemon, targetHpPct: number, field:Field, debug?: boolean){
-    var totalDefenderHp = calcStat(gen, 'hp', defender.species.baseStats.hp, defender.ivs.hp, defender.evs.hp, defender.level, defender.nature);
+function getPossibleResHps(move: Move, attacker: Pokemon, defender: Pokemon, defenderTotalHp:number, targetHpPct: number, field:Field, debug?: boolean){
     var result = calculateChampions(
         gen,
         attacker,
@@ -58,7 +98,8 @@ function getPossibleResHps(move: Move, attacker: Pokemon, defender: Pokemon, tar
     let validResHps = new Set<number>();
     if (Array.isArray(damageRolls) && damageRolls.every((roll) => typeof roll === 'number')){
         var possibleResHpsRaw = damageRolls.map((roll)=>Math.max(0, prevDefenderHp-roll));
-        var possibleResHpsPct = possibleResHpsRaw.map((hp) => hp/totalDefenderHp*100);
+        var possibleResHpsPct = possibleResHpsRaw.map((hp) => hp/defenderTotalHp*100);
+        if (debug) console.log(possibleResHpsPct);
         possibleResHpsPct.forEach((percent, index) => {
             if(
                 ((Math.floor(percent) === targetHpPct) || 
@@ -109,128 +150,119 @@ export function move(
     targetAttackerHpPct?: number,
     debug?:boolean
 ){
-    let attackerNewPossibleSpreads = new Set<number>();
+    // assuming the move category is not status here
+    const relevantDefensiveStat = (move.overrideDefensiveStat === 'spd' || move.category === 'Special') ? 'spd' : 'def';
+    const relevantAttackingStat = (move.overrideOffensiveStat === 'spa' || move.category === 'Special') ? 'spa' : 'atk';
+    let attackerNewPossibleAttackEvs = new Set<number>();
     let attackerNewPossibleHpEvs = new Map<number, Set<number>>();
-    let defenderNewPossibleSpreads = new Map<StatsTable<number>, Set<number>>();
     let attackerMon = attacker.pokemon;
     let defenderMon = defender.pokemon;
     let attackerPossibleHpInvestments = new Map<number, Set<number>>();
-    if(hasRecoil){
-        for(const [spread, hps] of attacker.possibleDefensiveSpreads){
-            let hpEv = spread.hp;
-            if(!attackerPossibleHpInvestments.has(hpEv)){
-                attackerPossibleHpInvestments.set(hpEv, hps);
-            }
-            else {
-                attackerPossibleHpInvestments.set(
-                    hpEv,
-                    attackerPossibleHpInvestments.get(hpEv)!.union(hps)
-                );
-            }
-        }
+    for(const [hpEv, fullBulkData] of attacker.possibleBulkInvestment){
+        attackerPossibleHpInvestments.set(hpEv, fullBulkData.remainingHp);
     }
     console.log("=======================================================================================")
     console.log(`${attackerMon.name} about to attack ${defenderMon.name} with ${move.name}`);
-    console.log(`${attacker.possibleAttackEvs.size} possible attack EVs for ${attackerMon.name}`);
-    console.log(`${defender.possibleDefensiveSpreads.size} possible def spreads for ${defenderMon.name}`);
+    console.log(`${attacker.possibleOffensiveInvestment[relevantAttackingStat].size} possible ${relevantAttackingStat} EVs for ${attackerMon.name}`);
+    console.log(`${totalDefensiveSpreadCount(defender, relevantDefensiveStat)} possible relevant ${relevantDefensiveStat} spreads for ${defenderMon.name}`);
+    if(hasRecoil) console.log(`${attacker.possibleBulkInvestment.size} possible HP EVs for ${attackerMon.name}`);
     // let counter = 0;
     // let percent_counter = 0;
-    let checkedDefensiveSpreads = new Map<string, Set<number>>();
-    for(const [defenderEvs, defenderHps] of defender.possibleDefensiveSpreads){
-        for(const defenderHp of defenderHps){
-            // counter += 1
-            // if(counter * 100 > defender.possibleDefensiveSpreads.size){
-            //     percent_counter += 1;
-            //     counter = 0
-            //     // console.log(`${percent_counter}% done`);
-            // }
-            if(move.category === "Physical" && defenderEvs.spd !== 0){
-                let relevantSpread = [defenderEvs.hp, defenderEvs.def].toString();
-                if(checkedDefensiveSpreads.has(relevantSpread)){
-                    defenderNewPossibleSpreads.set(defenderEvs, checkedDefensiveSpreads.get(relevantSpread)!)
-                }
-            }
-            else if(move.category === "Special" && defenderEvs.def !== 0){
-                let relevantSpread = [defenderEvs.hp, defenderEvs.spd].toString();
-                if(checkedDefensiveSpreads.has(relevantSpread)){
-                    defenderNewPossibleSpreads.set(defenderEvs, checkedDefensiveSpreads.get(relevantSpread)!)
-                }
-            }
-            for(const attackerEvs of attacker.possibleAttackEvs){
-                attackerMon.evs.atk = attackerEvs;
-                attackerMon.evs.spa = attackerEvs;
-                defenderMon.evs = defenderEvs;
-                attackerMon.rawStats.atk = calcStat(gen, 'atk', attackerMon.species.baseStats.atk, attackerMon.ivs.atk, attackerMon.evs.atk, attackerMon.level, attackerMon.nature);
-                attackerMon.rawStats.spa = calcStat(gen, 'spa', attackerMon.species.baseStats.spa, attackerMon.ivs.spa, attackerMon.evs.spa, attackerMon.level, attackerMon.nature)
-                defenderMon.rawStats.def = calcStat(gen, 'def', defenderMon.species.baseStats.def, defenderMon.ivs.def, defenderMon.evs.def, defenderMon.level, defenderMon.nature)
-                defenderMon.rawStats.spd = calcStat(gen, 'spd', defenderMon.species.baseStats.spd, defenderMon.ivs.spd, defenderMon.evs.spd, defenderMon.level, defenderMon.nature)
-                defenderMon.originalCurHP = defenderHp;
-                let validResHps = getPossibleResHps(move, attackerMon, defenderMon, targetHpPct, boardState, debug);
-                if(hasRecoil){
-                    for(const validResHp of validResHps){
-                        let recoil_possibleHpInvestments = recoil_findPossibleHpInvestments(attacker, recoilFactor!, defenderMon.originalCurHP - validResHp, attackerPossibleHpInvestments, targetAttackerHpPct!);
-                        if(recoil_possibleHpInvestments.size === 0){
-                            validResHps.delete(validResHp);
-                        }
-                        for(const [hpEv, hps] of recoil_possibleHpInvestments){
-                            if(!attackerNewPossibleHpEvs.has(hpEv)){
-                                attackerNewPossibleHpEvs.set(hpEv, hps);
+    for(const [hpEv, fullBulkData] of defender.possibleBulkInvestment){
+        if (debug) console.log(`defender: {hp: ${hpEv}}`)
+        let defenderNewPossibleDefEvs = new Set<number>();
+        let defenderPossibleResHps = new Set<number>();
+        for(const defenderHp of fullBulkData.remainingHp){
+            for(const defendingEv of fullBulkData[relevantDefensiveStat]){
+                for(const attackingEv of attacker.possibleOffensiveInvestment[relevantAttackingStat]){
+                    if (debug) console.log(`defender: {hp: ${hpEv}/${defenderHp}, ${relevantDefensiveStat}: ${defendingEv}}, attacker: {${relevantAttackingStat}: ${attackingEv}}`)
+                    attackerMon.evs[relevantAttackingStat] = attackingEv;
+                    defenderMon.evs[relevantDefensiveStat] = defendingEv;
+                    attackerMon.rawStats[relevantAttackingStat] = calcStat(
+                        gen,
+                        relevantAttackingStat,
+                        attackerMon.species.baseStats[relevantAttackingStat],
+                        attackerMon.ivs[relevantAttackingStat],
+                        attackerMon.evs[relevantAttackingStat],
+                        attackerMon.level,
+                        attackerMon.nature
+                    );
+                    defenderMon.rawStats[relevantDefensiveStat] = calcStat(
+                        gen,
+                        relevantDefensiveStat,
+                        defenderMon.species.baseStats[relevantDefensiveStat],
+                        defenderMon.ivs[relevantDefensiveStat],
+                        defenderMon.evs[relevantDefensiveStat],
+                        defenderMon.level,
+                        defenderMon.nature
+                    );
+                    defenderMon.originalCurHP = defenderHp;
+                    let validResHps = getPossibleResHps(move, attackerMon, defenderMon, defender.possibleBulkInvestment.get(hpEv)!.totalHp, targetHpPct, boardState, debug);
+                    if (debug) console.log(validResHps);
+                    if(hasRecoil){
+                        for(const validResHp of validResHps){
+                            let recoil_possibleHpInvestments = recoil_findPossibleHpInvestments(attacker, recoilFactor!, defenderMon.originalCurHP - validResHp, attackerPossibleHpInvestments, targetAttackerHpPct!);
+                            if(recoil_possibleHpInvestments.size === 0){
+                                validResHps.delete(validResHp);
                             }
-                            else {
-                                attackerNewPossibleHpEvs.set(
-                                    hpEv,
-                                    attackerNewPossibleHpEvs.get(hpEv)!.union(hps)
-                                );
+                            for(const [hpEv, hps] of recoil_possibleHpInvestments){
+                                if(!attackerNewPossibleHpEvs.has(hpEv)){
+                                    attackerNewPossibleHpEvs.set(hpEv, hps);
+                                }
+                                else {
+                                    attackerNewPossibleHpEvs.set(
+                                        hpEv,
+                                        attackerNewPossibleHpEvs.get(hpEv)!.union(hps)
+                                    );
+                                }
                             }
                         }
                     }
-                }
-                if(validResHps.size > 0){
-                    if(!attackerNewPossibleSpreads.has(attackerEvs)){
-                        attackerNewPossibleSpreads.add(attackerEvs);
-                    }
-                    if(!defenderNewPossibleSpreads.has(defenderEvs)){
-                        defenderNewPossibleSpreads.set(defenderEvs, validResHps);
-                    }
-                    else{
-                        defenderNewPossibleSpreads.set(defenderEvs,
-                            defenderNewPossibleSpreads.get(defenderEvs)!.union(validResHps)
-                        )
+                    if(validResHps.size > 0){
+                        attackerNewPossibleAttackEvs.add(attackingEv);
+                        defenderNewPossibleDefEvs.add(defendingEv);
+                        validResHps.forEach(remainingHp => defenderPossibleResHps.add(remainingHp));
                     }
                 }
             }
         }
+        if (defenderNewPossibleDefEvs.size > 0 && defenderPossibleResHps.size > 0) {
+            let defenderCurBulkInfo = defender.possibleBulkInvestment.get(hpEv)!
+            defenderCurBulkInfo[relevantDefensiveStat] = defenderNewPossibleDefEvs;
+            defenderCurBulkInfo.remainingHp = defenderPossibleResHps;
+        }
+        else {
+            defender.possibleBulkInvestment.delete(hpEv);
+        }
     }
-    attacker.possibleAttackEvs = attackerNewPossibleSpreads;
-    defender.possibleDefensiveSpreads = defenderNewPossibleSpreads;
+    attacker.possibleOffensiveInvestment[relevantAttackingStat] = attackerNewPossibleAttackEvs;
     if(hasRecoil){
-        for(const [spread, hps] of attacker.possibleDefensiveSpreads){
-            let hpEv = spread.hp;
+        for(const [hpEv, fullBulkData] of attacker.possibleBulkInvestment){
             if(!attackerNewPossibleHpEvs.has(hpEv)){
-                attacker.possibleDefensiveSpreads.delete(spread);
+                attacker.possibleBulkInvestment.delete(hpEv);
             }
             else {
-                attacker.possibleDefensiveSpreads.set(spread, attackerNewPossibleHpEvs.get(hpEv)!);
+                attacker.possibleBulkInvestment.get(hpEv)!.remainingHp = attackerNewPossibleHpEvs.get(hpEv)!;
             }
         }
     }
     console.log(`${attackerMon.name} just attacked ${defenderMon.name} with ${move.name}`);
-    console.log(`${attacker.possibleAttackEvs.size} possible attack EVs for ${attackerMon.name}`);
-    console.log(`${defender.possibleDefensiveSpreads.size} possible def spreads for ${defenderMon.name}`);
-    console.log(`${attacker.possibleDefensiveSpreads.size} possible def spreads for ${attackerMon.name}`);
+    console.log(`${attacker.possibleOffensiveInvestment[relevantAttackingStat].size} possible ${relevantAttackingStat} EVs for ${attackerMon.name}`);
+    console.log(`${totalDefensiveSpreadCount(defender, relevantDefensiveStat)} possible relevant ${relevantDefensiveStat} spreads for ${defenderMon.name}`);
+    if(hasRecoil) console.log(`${attacker.possibleBulkInvestment.size} possible HP EVs for ${attackerMon.name}`);
     console.log("=======================================================================================")
 }
 
 export function heal(augmentedMon: AugmentedMon, targetHpPct: number, logHealAmt: number){
-    let newPossibleSpreads = new Map<StatsTable<number>, Set<number>>();
     let pokemon = augmentedMon.pokemon;
     console.log("=======================================================================================")
     console.log(`${pokemon.name} about to heal 1/${2**logHealAmt} HP`);
-    console.log(`${augmentedMon.possibleDefensiveSpreads.size} possible def spreads for ${pokemon.name}`);
-    for(const [defSpread, Hps] of augmentedMon.possibleDefensiveSpreads){
-        let maxHpOnSpread = calcStat(gen, 'hp', pokemon.species.baseStats.hp, pokemon.ivs.hp, defSpread.hp, pokemon.level, pokemon.nature);
+    console.log(`${augmentedMon.possibleBulkInvestment.size} possible HP EVs for ${pokemon.name}`);
+    for(const [hpEv, fullBulkData] of augmentedMon.possibleBulkInvestment){
+        let maxHpOnSpread = calcStat(gen, 'hp', pokemon.species.baseStats.hp, pokemon.ivs.hp, hpEv, pokemon.level, pokemon.nature);
         let healAmount = maxHpOnSpread >> logHealAmt;
         let newPossibleHps = new Set<number>();
+        let Hps = fullBulkData.remainingHp;
         for(const Hp of Hps){
             let postHealHp = Math.min(maxHpOnSpread, Hp + healAmount);
             let postHealHpPct = postHealHp / maxHpOnSpread * 100;
@@ -239,25 +271,27 @@ export function heal(augmentedMon: AugmentedMon, targetHpPct: number, logHealAmt
             }
         }
         if(newPossibleHps.size > 0){
-            newPossibleSpreads.set(defSpread, newPossibleHps)
+            fullBulkData.remainingHp = newPossibleHps
+        }
+        else {
+            augmentedMon.possibleBulkInvestment.delete(hpEv);
         }
     }
-    augmentedMon.possibleDefensiveSpreads = newPossibleSpreads;
     console.log(`${pokemon.name} just healed 1/${2**logHealAmt} HP`);
-    console.log(`${augmentedMon.possibleDefensiveSpreads.size} possible def spreads for ${pokemon.name}`);
+    console.log(`${augmentedMon.possibleBulkInvestment.size} possible HP EVs for ${pokemon.name}`);
     console.log("=======================================================================================")
 }
 
 export function selfdmg(augmentedMon: AugmentedMon, targetHpPct: number, selfDmgFactor: number){
-    let newPossibleSpreads = new Map<StatsTable<number>, Set<number>>();
     let pokemon = augmentedMon.pokemon;
     console.log("=======================================================================================")
     console.log(`${pokemon.name} about to do 1/${selfDmgFactor} HP self-damage`);
-    console.log(`${augmentedMon.possibleDefensiveSpreads.size} possible def spreads for ${pokemon.name}`);
-    for(const [defSpread, Hps] of augmentedMon.possibleDefensiveSpreads){
-        let maxHpOnSpread = calcStat(gen, 'hp', pokemon.species.baseStats.hp, pokemon.ivs.hp, defSpread.hp, pokemon.level, pokemon.nature);
+    console.log(`${augmentedMon.possibleBulkInvestment.size} possible HP EVs for ${pokemon.name}`);
+    for(const [hpEv, fullBulkData] of augmentedMon.possibleBulkInvestment){
+        let maxHpOnSpread = calcStat(gen, 'hp', pokemon.species.baseStats.hp, pokemon.ivs.hp, hpEv, pokemon.level, pokemon.nature);
         let selfDmgAmt = Math.floor(maxHpOnSpread / selfDmgFactor);
         let newPossibleHps = new Set<number>();
+        let Hps = fullBulkData.remainingHp;
         for(const Hp of Hps){
             let postDmgHp = Math.max(Hp - selfDmgAmt, 0);
             let postDmgHpPct = postDmgHp / maxHpOnSpread * 100;
@@ -270,24 +304,23 @@ export function selfdmg(augmentedMon: AugmentedMon, targetHpPct: number, selfDmg
             }
         }
         if(newPossibleHps.size > 0){
-            newPossibleSpreads.set(defSpread, newPossibleHps)
+            fullBulkData.remainingHp = newPossibleHps
+        }
+        else {
+            augmentedMon.possibleBulkInvestment.delete(hpEv);
         }
     }
-    augmentedMon.possibleDefensiveSpreads = newPossibleSpreads;
     console.log(`${pokemon.name} just did 1/${selfDmgFactor} HP self-damage`);
-    console.log(`${augmentedMon.possibleDefensiveSpreads.size} possible def spreads for ${pokemon.name}`);
+    console.log(`${augmentedMon.possibleBulkInvestment.size} possible HP EVs for ${pokemon.name}`);
     console.log("=======================================================================================")
 }
 
 function resetTeam(team: Record<string, AugmentedMon>){
     for(const [_, fullData] of Object.entries(team)){
         let pokemon = fullData.pokemon;
-        for(const [spread, _] of fullData.possibleDefensiveSpreads){
-            let maxHpOnSpread = calcStat(gen, 'hp', pokemon.species.baseStats.hp, pokemon.ivs.hp, pokemon.evs.hp, pokemon.level, pokemon.nature);
-            fullData.possibleDefensiveSpreads.set(
-                spread,
-                new Set([maxHpOnSpread])
-            );
+        for(const [hpEv, fullBulkData] of fullData.possibleBulkInvestment){
+            let maxHpOnSpread = calcStat(gen, 'hp', pokemon.species.baseStats.hp, pokemon.ivs.hp, hpEv, pokemon.level, pokemon.nature);
+            fullBulkData.remainingHp = new Set([maxHpOnSpread]);
         }
         pokemon.boosts = {hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0};
     }

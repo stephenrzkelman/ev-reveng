@@ -1,4 +1,4 @@
-import { AugmentedMon, gen } from "../../reveng";
+import { AugmentedMon, gen, range } from "../../reveng";
 import { Pokemon, Field, Move } from "../../../calc/src";
 import { StatsTable } from '@pkmn/dex';
 
@@ -17,8 +17,7 @@ export var team1 = {
             evs: {},
             boosts: {}
         }),
-        undefined,
-        new Set([0,1])
+        {spa: [0,1]}
     ),
     "Aero": new AugmentedMon(
         new Pokemon(
@@ -31,10 +30,7 @@ export var team1 = {
                 nature: 'Jolly',
             }
         ), 
-        new Map<StatsTable<number>, Set<number>>([
-            [{ hp: 2, atk: 32, spa:0, spe: 32, def: 0, spd: 0 }, new Set([157])]
-        ]),
-        new Set([32])
+        { hp: 2, atk: 32, spa:0, spe: 32, def: 0, spd: 0 }
     ),
     "Chomp": new AugmentedMon(
         new Pokemon(
@@ -57,10 +53,7 @@ export var team1 = {
                 nature: 'Adamant'
             }
         ), 
-        new Map<StatsTable<number>, Set<number>>([
-            [{ hp: 32, atk: 32, spa:0, spe: 0, def: 2, spd: 0 }, new Set([207])],
-        ]),
-        new Set([32])
+        { hp: 32, atk: 32, spa:0, spe: 0, def: 2, spd: 0 }
     ),
         "Indeedee": new AugmentedMon(
             new Pokemon(
@@ -94,10 +87,7 @@ export var team2 = {
             item: 'Eject Button',
             nature: 'Sassy',
         }), 
-        new Map<StatsTable<number>, Set<number>>([
-            [{ hp: 32, atk: 0, spa:0, spe: 0, def: 4, spd: 30 }, new Set([207])]
-        ]),
-        new Set([0])
+        { hp: 32, atk: 0, spa:0, spe: 0, def: 4, spd: 30 }
     ),
     "Sneasler": new AugmentedMon(
         new Pokemon(gen, 'Sneasler', {
@@ -114,10 +104,7 @@ export var team2 = {
             item: 'Leftovers',
             nature: 'Modest'
         }), 
-        new Map<StatsTable<number>, Set<number>>([
-            [{ hp: 10, atk: 0, spa:30, spe: 0, def: 18, spd: 8 }, new Set([160])],
-        ]),
-        new Set([30])
+        { hp: 10, atk: 0, spa:30, spe: 0, def: 18, spd: 8 }
     ),
     "Incin": new AugmentedMon(
         new Pokemon(gen, "Incineroar", {
@@ -126,12 +113,7 @@ export var team2 = {
             item: 'Sitrus Berry',
             nature: 'Sassy'
         }), 
-        new Map<StatsTable<number>, Set<number>>([
-            [{ hp: 31, atk: 0, spa:0, spe: 0, def: 21, spd: 14 }, new Set([201])],
-            [{ hp: 31, atk: 0, spa:0, spe: 0, def: 15, spd: 20 }, new Set([201])],
-            [{ hp: 31, atk: 0, spa:0, spe: 0, def: 14, spd: 21 }, new Set([201])],
-        ]),
-        new Set([0])
+        { hp: 31, atk: 0, spa:0, spe: 0, def: [21,15,14], spd: [14,20,21] }
     ),
     "Gengar": new AugmentedMon(
         new Pokemon(gen, "Gengar-Mega", {
