@@ -1,19 +1,12 @@
 import {calculateChampions} from '../calc/src/mechanics/champions';
 import { Generations } from "../calc/src/data";
-import { Dex, StatsTable } from '@pkmn/dex';
-import { Pokemon } from "../calc/src";
-import { Move } from '../calc/src';
-import { Field } from "../calc/src";
-import { Weather } from '@pkmn/dex';
+import { Dex, StatsTable, Weather } from '@pkmn/dex';
+import { calcStat, Pokemon, Move, Field } from "../calc/src";
+import { Side } from '../calc/src';
 import type * as I from '../calc/src/data';
-import { calcStat } from '../calc/src';
 
-const gen = Generations.get(0);
-const boardState = new Field(
-    {
-        gameType: 'Doubles'
-    }
-);
+export const gen = Generations.get(0);
+
 const allPotentialDefensiveSpreads = new Set<StatsTable<number>>();
 for(let hp = 0; hp <= 32; hp += 1){
     for(let def = 0; def <= Math.min(32, 66-(hp)); def += 1){
@@ -24,7 +17,7 @@ for(let hp = 0; hp <= 32; hp += 1){
 };
 console.log(`${allPotentialDefensiveSpreads.size} total possible defensive spreads`);
 
-class AugmentedMon{
+export class AugmentedMon{
     pokemon: Pokemon;
     possibleDefensiveSpreads: Map<StatsTable<number>, Set<number>>;
     possibleAttackEvs: Set<number>;
@@ -48,14 +41,14 @@ class AugmentedMon{
     }
 }
 
-function getPossibleResHps(move: Move, attacker: Pokemon, defender: Pokemon, targetHpPct: number, debug?: boolean){
+function getPossibleResHps(move: Move, attacker: Pokemon, defender: Pokemon, targetHpPct: number, field:Field, debug?: boolean){
     var totalDefenderHp = calcStat(gen, 'hp', defender.species.baseStats.hp, defender.ivs.hp, defender.evs.hp, defender.level, defender.nature);
     var result = calculateChampions(
         gen,
         attacker,
         defender,
         move,
-        boardState
+        field
     );
     var prevDefenderHp = result.defender.curHP();
     var damageRolls = result.damage;
@@ -105,11 +98,12 @@ function recoil_findPossibleHpInvestments(attacker: AugmentedMon, recoilFactor: 
     return validHpInvestments;
 }
 
-function move(
+export function move(
     attacker: AugmentedMon,
     defender: AugmentedMon,
     move: Move,
     targetHpPct: number,
+    boardState: Field,
     hasRecoil:boolean=false,
     recoilFactor?: number,
     targetAttackerHpPct?: number,
@@ -171,7 +165,7 @@ function move(
                 defenderMon.rawStats.def = calcStat(gen, 'def', defenderMon.species.baseStats.def, defenderMon.ivs.def, defenderMon.evs.def, defenderMon.level, defenderMon.nature)
                 defenderMon.rawStats.spd = calcStat(gen, 'spd', defenderMon.species.baseStats.spd, defenderMon.ivs.spd, defenderMon.evs.spd, defenderMon.level, defenderMon.nature)
                 defenderMon.originalCurHP = defenderHp;
-                let validResHps = getPossibleResHps(move, attackerMon, defenderMon, targetHpPct, debug);
+                let validResHps = getPossibleResHps(move, attackerMon, defenderMon, targetHpPct, boardState, debug);
                 if(hasRecoil){
                     for(const validResHp of validResHps){
                         let recoil_possibleHpInvestments = recoil_findPossibleHpInvestments(attacker, recoilFactor!, defenderMon.originalCurHP - validResHp, attackerPossibleHpInvestments, targetAttackerHpPct!);
@@ -227,7 +221,7 @@ function move(
     console.log("=======================================================================================")
 }
 
-function heal(augmentedMon: AugmentedMon, targetHpPct: number, logHealAmt: number){
+export function heal(augmentedMon: AugmentedMon, targetHpPct: number, logHealAmt: number){
     let newPossibleSpreads = new Map<StatsTable<number>, Set<number>>();
     let pokemon = augmentedMon.pokemon;
     console.log("=======================================================================================")
@@ -254,7 +248,7 @@ function heal(augmentedMon: AugmentedMon, targetHpPct: number, logHealAmt: numbe
     console.log("=======================================================================================")
 }
 
-function selfdmg(augmentedMon: AugmentedMon, targetHpPct: number, selfDmgFactor: number){
+export function selfdmg(augmentedMon: AugmentedMon, targetHpPct: number, selfDmgFactor: number){
     let newPossibleSpreads = new Map<StatsTable<number>, Set<number>>();
     let pokemon = augmentedMon.pokemon;
     console.log("=======================================================================================")
@@ -299,268 +293,31 @@ function resetTeam(team: Record<string, AugmentedMon>){
     }
 }
 
-var team1 = {
-    "Zard": new AugmentedMon(
-            new Pokemon(gen, 'Charizard-Mega-Y', {
-            level: 50,
-            ability: 'Drought',
-            item: 'Charizardite Y',
-            nature: 'Modest',
-            evs: {},
-            boosts: {}
-        }),
-        undefined,
-        new Set([0,1])
-    ),
-    "Aero": new AugmentedMon(
-        new Pokemon(
-            gen,
-            "Aerodactyl",
-            {
-                level: 50,
-                ability: 'Unnerve',
-                item: "Focus Sash",
-                nature: 'Jolly',
-            }
-        ), 
-        new Map<StatsTable<number>, Set<number>>([
-            [{ hp: 2, atk: 32, spa:0, spe: 32, def: 0, spd: 0 }, new Set([157])]
-        ]),
-        new Set([32])
-    ),
-    "Chomp": new AugmentedMon(
-        new Pokemon(
-            gen, "Garchomp",
-            {
-                level: 50,
-                ability: 'Rough Skin',
-                item: "Sitrus Berry",
-                nature: 'Jolly',
-            }
-        )
-    ),
-    "Kingambit": new AugmentedMon(
-        new Pokemon(
-            gen, "Kingambit",
-            {
-                level: 50,
-                ability: 'Defiant',
-                item: 'Chople Berry',
-                nature: 'Adamant'
-            }
-        ), 
-        new Map<StatsTable<number>, Set<number>>([
-            [{ hp: 32, atk: 32, spa:0, spe: 0, def: 2, spd: 0 }, new Set([207])],
-        ]),
-        new Set([32])
-    ),
-        "Indeedee": new AugmentedMon(
-            new Pokemon(
-                gen, "Indeedee-F",
-                {
-                    level: 50,
-                    ability: 'Psychic Surge',
-                    item: 'Rocky Helmet',
-                    nature: 'Bold'
-                }
-            )
-        ),
-        "Gard": new AugmentedMon(
-            new Pokemon(
-                gen, "Gardevoir-Mega",
-                {
-                    level: 50,
-                    ability: 'Pixilate',
-                    item: 'Gardevoirite',
-                    nature: 'Modest'
-                }
-            )
-        )
+function resetAttribute(attribute: boolean){
+    attribute = false;
 }
 
-var team2 = {
-    "Rilla": new AugmentedMon(
-        new Pokemon(gen, 'Rillaboom', {
-            level: 50,
-            ability: 'Grassy Surge',
-            item: 'Eject Button',
-            nature: 'Sassy',
-        }), 
-        new Map<StatsTable<number>, Set<number>>([
-            [{ hp: 32, atk: 0, spa:0, spe: 0, def: 4, spd: 30 }, new Set([207])]
-        ]),
-        new Set([0])
-    ),
-    "Sneasler": new AugmentedMon(
-        new Pokemon(gen, 'Sneasler', {
-            level: 50,
-            ability: 'Unburden',
-            item: 'Grassy Seed',
-            nature: 'Adamant',
-        })
-    ),
-    "Kommo-o": new AugmentedMon(
-        new Pokemon(gen, 'Kommo-o', {
-            level: 50,
-            ability: 'Soundproof',
-            item: 'Leftovers',
-            nature: 'Modest'
-        }), 
-        new Map<StatsTable<number>, Set<number>>([
-            [{ hp: 10, atk: 0, spa:30, spe: 0, def: 18, spd: 8 }, new Set([160])],
-        ]),
-        new Set([30])
-    ),
-    "Incin": new AugmentedMon(
-        new Pokemon(gen, "Incineroar", {
-            level: 50,
-            ability: 'Intimidate',
-            item: 'Sitrus Berry',
-            nature: 'Sassy'
-        }), 
-        new Map<StatsTable<number>, Set<number>>([
-            [{ hp: 31, atk: 0, spa:0, spe: 0, def: 21, spd: 14 }, new Set([201])],
-            [{ hp: 31, atk: 0, spa:0, spe: 0, def: 15, spd: 20 }, new Set([201])],
-            [{ hp: 31, atk: 0, spa:0, spe: 0, def: 14, spd: 21 }, new Set([201])],
-        ]),
-        new Set([0])
-    ),
-    "Gengar": new AugmentedMon(
-        new Pokemon(gen, "Gengar-Mega", {
-            level: 50,
-            ability: 'Shadow Tag',
-            item: 'Gengarite',
-            nature: 'Modest'
-        })
-    )
+function resetField(field: Field) {
+  for (const key of Object.keys(field.attackerSide) as (keyof Side)[]) {
+    if (field.attackerSide[key] === true) {
+      resetAttribute(field.attackerSide[key]);
+    }
+  }
+  for (const key of Object.keys(field.defenderSide) as (keyof Side)[]) {
+    if (field.defenderSide[key] === true) {
+      resetAttribute(field.defenderSide[key]);
+    }
+  }
+  for (const key of Object.keys(field) as (keyof Field)[]) {
+    if (field[key] === true) {
+        resetAttribute(field[key]);
+    }
+  }
 }
 
 
-let HW = new Move(gen, 'Heat Wave');
-let ClangScale = new Move(gen, 'Clanging Scales');
-let RS = new Move(gen, 'Rock Slide');
-let FO = new Move(gen, 'Fake Out');
-let Stomp = new Move(gen, 'Stomping Tantrum');
-let Kowtow = new Move(gen, 'Kowtow Cleave');
-let EForce = new Move(gen, 'Expanding Force');
-let HVoice = new Move(gen, 'Hyper Voice');
-
-let battleLog = [
-    // Rillaboom In
-    (() => boardState.terrain='Grassy'),
-    // Charizard mega evolves
-    (() => boardState.weather='Sun'),
-    () => move(team2.Rilla, team1.Aero, new Move(gen, 'Grassy Glide'), 54),
-    () => move(team1.Zard, team2.Sneasler, HW, 29),
-    () => move(team1.Zard, team2['Kommo-o'], HW, 66),
-    // Terrain
-    () => heal(team2['Sneasler'], 35, 4),
-    () => heal(team2['Kommo-o'], 73, 4),
-    // Leftovers
-    () => heal(team2['Kommo-o'], 79, 4),
-    () => move(team1.Zard, team2['Kommo-o'], HW, 47),
-    // Clangorous Soul
-    () => selfdmg(team2['Kommo-o'], 14, 3),
-    () => team2['Kommo-o'].pokemon.boosts = {hp: 0, atk:1, def: 1, spa: 1, spd: 1, spe: 1},
-    // Terrain
-    () => heal(team2['Sneasler'], 41, 4),
-    () => heal(team2['Kommo-o'], 20, 4),
-    // Leftovers
-    () => heal(team2['Kommo-o'], 26, 4),
-    // Incin switches in
-    () => team1.Zard.pokemon.boosts.atk -= 1,
-    () => team1.Aero.pokemon.boosts.atk -= 1,
-    () => move(team1.Zard, team2.Incin, HW, 77),
-    // Terrain
-    () => heal(team2['Kommo-o'], 33, 4),
-    () => heal(team2['Incin'], 83, 4),
-    // Lefties
-    () => heal(team2['Kommo-o'], 39, 4),
-    // Terrain Ends
-    () => boardState.terrain = undefined,
-    () => move(team1.Aero, team2.Incin, RS, 55),
-    () => move(team1.Aero, team2['Kommo-o'], RS, 33),
-    () => move(team2['Kommo-o'], team1.Aero, new Move(gen, 'Aura Sphere'), 0),
-    // Lefties
-    () => heal(team2['Kommo-o'], 40, 4),
-    // Sun Ends
-    () => boardState.weather = undefined,
-    // Rilla swaps in
-    () => boardState.terrain = 'Grassy',
-    () => move(team1.Chomp, team2.Rilla, new Move(gen, 'Earthquake'), 92),
-    // Eject button ==> incin
-    () => team1.Chomp.pokemon.boosts.atk -= 1,
-    () => team1.Zard.pokemon.boosts.atk -= 1,
-    () => move(team1.Zard, team2.Incin, HW, 39),
-    // Sitrus
-    () => heal(team2.Incin, 64, 2),
-    // Terrain
-    () => heal(team2['Kommo-o'], 46, 4),
-    () => heal(team2.Incin, 70, 4),
-    // Lefties
-    () => heal(team2['Kommo-o'], 52, 4),
-    () => move(team2['Kommo-o'], team1.Kingambit, ClangScale, 73),
-    () => team2['Kommo-o'].pokemon.boosts.def -= 1,
-    () => move(team2.Incin, team1.Kingambit, new Move(gen, 'Flare Blitz'), 8, true, 3, 48),
-    // Terrain
-    () => heal(team2['Kommo-o'], 58, 4),
-    () => heal(team1.Kingambit, 14, 4),
-    () => heal(team2.Incin, 54, 4),
-    // Lefties
-    () => heal(team2['Kommo-o'], 65, 4),
-    () => move(team2['Kommo-o'], team1.Kingambit, ClangScale, 0),
-    () => move(team2['Kommo-o'], team1.Chomp, ClangScale, 0),
-    () => team2['Kommo-o'].pokemon.boosts.def -= 1,
-    // Terrain
-    () => heal(team2['Kommo-o'], 71, 4),
-    () => heal(team2.Sneasler, 47, 4),
-    // Lefties
-    () => heal(team2['Kommo-o'], 77, 4),
-]
-let game2Log = [
-    // Intimidate
-    () => team1.Kingambit.pokemon.boosts.atk -= 1,
-    () => team1.Chomp.pokemon.boosts.atk -= 1,
-    // Defiant
-    () => team1.Kingambit.pokemon.boosts.atk += 2,
-    () => move(team2.Incin, team1.Kingambit, FO, 95),
-    () => move(team1.Chomp, team2.Incin, Stomp, 61),// false, undefined, undefined, true),
-    // Rillaboom in
-    () => boardState.terrain = 'Grassy',
-    () => move(team1.Chomp, team2.Incin, Stomp, 25),
-    () => heal(team2.Incin, 50, 2),
-    () => move(team1.Kingambit, team2.Rilla, Kowtow, 34),
-    // Parting Shot
-    () => team1.Kingambit.pokemon.boosts.atk -= 1,
-    () => team1.Kingambit.pokemon.boosts.atk += 2,
-    () => team1.Kingambit.pokemon.boosts.spa -= 1,
-    () => team1.Kingambit.pokemon.boosts.atk += 2,
-    // Indeedee in
-    () => boardState.terrain = 'Psychic',
-    // Incin in, intimidate
-    () => team1.Gard.pokemon.boosts.atk -= 1,
-    () => team1.Indeedee.pokemon.boosts.atk -= 1,
-    () => move(team1.Gard, team2.Gengar, EForce, 0),
-    // Helping hand Hyper Voice
-    () => boardState.attackerSide.isHelpingHand = true,
-    () => move(team1.Gard, team2.Incin, HVoice, 0),
-    () => boardState.attackerSide.isHelpingHand = false,
-];
-
-for(const event of battleLog){
-    event();
-}
-resetTeam(team1);
-resetTeam(team2);
-boardState.weather = undefined;
-boardState.terrain = undefined;
-for(const event of game2Log){
-    event();
-}
-console.log("Kommo-o has ", team2['Kommo-o'].possibleDefensiveSpreads.size, " possible defensive spreads");
-console.log("Sneasler has ", team2['Sneasler'].possibleDefensiveSpreads.size, " possible defensive spreads");
-console.log("Rillaboom has ", team2['Rilla'].possibleDefensiveSpreads.size, " possible defensive spreads");
-console.log("Incineroar has ", team2['Incin'].possibleDefensiveSpreads.size, " possible defensive spreads");
-for(const ev of team2.Rilla.possibleAttackEvs){
-    console.log(ev);
+export function resetForNextBattle(team1: Record<string, AugmentedMon>, team2: Record<string, AugmentedMon>, boardState: Field){
+    resetTeam(team1);
+    resetTeam(team2);
+    resetField(boardState);
 }
