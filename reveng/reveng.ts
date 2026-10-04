@@ -28,16 +28,25 @@ type PossibleOffense = {
     spa: Set<number>
 }
 
+type OtsInfo = {
+    level: 50,
+    ability: string,
+    item: string,
+    nature: string
+}
+
 function totalDefensiveSpreadCount(mon: AugmentedMon, statName: 'spd' | 'def') {
     return Array.from(mon.possibleBulkInvestment.values()).reduce((sum, fullBulkData) => sum + fullBulkData[statName].size, 0)
 }
 
 export class AugmentedMon{
     pokemon: Pokemon;
+    otsInfo: OtsInfo;
     possibleBulkInvestment: Map<number, PossibleBulk>;
     possibleOffensiveInvestment: PossibleOffense;
-    constructor(pokemon: Pokemon, evs: Partial<StatsTable<number | number[] | Range>> = {}){
-        this.pokemon = pokemon;
+    constructor(pokemonName: string, pokemonOtsInfo: OtsInfo, evs: Partial<StatsTable<number | number[] | Range>> = {}){
+        this.pokemon = new Pokemon(gen, pokemonName, pokemonOtsInfo);
+        this.otsInfo = pokemonOtsInfo;
         function getEvPossibilities(statName: string){
             let evPossibilities = new Set<number>();
             if(statName in evs){
@@ -73,8 +82,8 @@ export class AugmentedMon{
         let possibleHpEvs = getEvPossibilities('hp');
         for(const possibleHpEv of possibleHpEvs) {
             this.possibleBulkInvestment.set(possibleHpEv, {
-                totalHp: calcStat(gen, 'hp', pokemon.species.baseStats.hp, pokemon.ivs.hp, possibleHpEv, pokemon.level, pokemon.nature),
-                remainingHp: new Set([calcStat(gen, 'hp', pokemon.species.baseStats.hp, pokemon.ivs.hp, possibleHpEv, pokemon.level, pokemon.nature)]),
+                totalHp: calcStat(gen, 'hp', this.pokemon.species.baseStats.hp, this.pokemon.ivs.hp, possibleHpEv, this.pokemon.level, this.pokemon.nature),
+                remainingHp: new Set([calcStat(gen, 'hp', this.pokemon.species.baseStats.hp, this.pokemon.ivs.hp, possibleHpEv, this.pokemon.level, this.pokemon.nature)]),
                 def: new Set(possibleDefEvs),
                 spd: new Set(possibleSpdEvs)
             });
