@@ -1,0 +1,326 @@
+=======================================================================================
+Rillaboom about to attack Tyranitar with Fake Out
+33 possible atk EVs for Rillaboom
+1089 possible relevant def spreads for Tyranitar
+Rillaboom just attacked Tyranitar with Fake Out
+33 possible atk EVs for Rillaboom
+817 possible relevant def spreads for Tyranitar
+=======================================================================================
+=======================================================================================
+Rillaboom about to do 1/16 HP self-damage
+33 possible HP EVs for Rillaboom
+Rillaboom just did 1/16 HP self-damage
+16 possible HP EVs for Rillaboom
+=======================================================================================
+=======================================================================================
+Tyranitar about to heal 1/16 HP
+33 possible HP EVs for Tyranitar
+Tyranitar just healed 1/16 HP
+7 possible HP EVs for Tyranitar
+=======================================================================================
+=======================================================================================
+Rillaboom about to heal 1/16 HP
+16 possible HP EVs for Rillaboom
+Rillaboom just healed 1/16 HP
+16 possible HP EVs for Rillaboom
+=======================================================================================
+=======================================================================================
+Tyranitar-Mega about to attack Milotic with Knock Off
+33 possible atk EVs for Tyranitar-Mega
+1089 possible relevant def spreads for Milotic
+Tyranitar-Mega just attacked Milotic with Knock Off
+33 possible atk EVs for Tyranitar-Mega
+474 possible relevant def spreads for Milotic
+=======================================================================================
+=======================================================================================
+Corviknight about to attack Staraptor with Brave Bird
+33 possible atk EVs for Corviknight
+1089 possible relevant def spreads for Staraptor
+33 possible HP EVs for Corviknight
+Corviknight just attacked Staraptor with Brave Bird
+33 possible atk EVs for Corviknight
+1068 possible relevant def spreads for Staraptor
+33 possible HP EVs for Corviknight
+=======================================================================================
+=======================================================================================
+Staraptor about to do 1/16 HP self-damage
+33 possible HP EVs for Staraptor
+Staraptor just did 1/16 HP self-damage
+5 possible HP EVs for Staraptor
+=======================================================================================
+=======================================================================================
+Milotic about to do 1/16 HP self-damage
+30 possible HP EVs for Milotic
+Milotic just did 1/16 HP self-damage
+30 possible HP EVs for Milotic
+=======================================================================================
+=======================================================================================
+Tyranitar-Mega about to heal 1/16 HP
+7 possible HP EVs for Tyranitar-Mega
+Tyranitar-Mega just healed 1/16 HP
+7 possible HP EVs for Tyranitar-Mega
+=======================================================================================
+=======================================================================================
+Milotic about to heal 1/16 HP
+30 possible HP EVs for Milotic
+Milotic just healed 1/16 HP
+30 possible HP EVs for Milotic
+=======================================================================================
+=======================================================================================
+Milotic about to attack Corviknight with Muddy Water
+33 possible spa EVs for Milotic
+1089 possible relevant spd spreads for Corviknight
+Milotic just attacked Corviknight with Muddy Water
+33 possible spa EVs for Milotic
+624 possible relevant spd spreads for Corviknight
+=======================================================================================
+=======================================================================================
+Milotic about to attack Tyranitar-Mega with Muddy Water
+33 possible spa EVs for Milotic
+231 possible relevant spd spreads for Tyranitar-Mega
+Milotic just attacked Tyranitar-Mega with Muddy Water
+33 possible spa EVs for Milotic
+198 possible relevant spd spreads for Tyranitar-Mega
+=======================================================================================
+=======================================================================================
+Tyranitar-Mega about to attack Staraptor-Mega with Rock Slide
+33 possible atk EVs for Tyranitar-Mega
+159 possible relevant def spreads for Staraptor-Mega
+Tyranitar-Mega just attacked Staraptor-Mega with Rock Slide
+33 possible atk EVs for Tyranitar-Mega
+159 possible relevant def spreads for Staraptor-Mega
+=======================================================================================
+=======================================================================================
+Tyranitar-Mega about to heal 1/16 HP
+6 possible HP EVs for Tyranitar-Mega
+Tyranitar-Mega just healed 1/16 HP
+6 possible HP EVs for Tyranitar-Mega
+=======================================================================================
+=======================================================================================
+Tyranitar-Mega about to attack Gholdengo with Knock Off
+33 possible atk EVs for Tyranitar-Mega
+1089 possible relevant def spreads for Gholdengo
+Tyranitar-Mega just attacked Gholdengo with Knock Off
+33 possible atk EVs for Tyranitar-Mega
+642 possible relevant def spreads for Gholdengo
+=======================================================================================
+=======================================================================================
+Gholdengo about to heal 1/16 HP
+23 possible HP EVs for Gholdengo
+Gholdengo just healed 1/16 HP
+17 possible HP EVs for Gholdengo
+=======================================================================================
+=======================================================================================
+Tyranitar-Mega about to heal 1/16 HP
+6 possible HP EVs for Tyranitar-Mega
+Tyranitar-Mega just healed 1/16 HP
+5 possible HP EVs for Tyranitar-Mega
+=======================================================================================
+=======================================================================================
+Gholdengo about to attack Corviknight with Shadow Ball
+33 possible spa EVs for Gholdengo
+624 possible relevant spd spreads for Corviknight
+Gholdengo just attacked Corviknight with Shadow Ball
+33 possible spa EVs for Gholdengo
+532 possible relevant spd spreads for Corviknight
+=======================================================================================
+=======================================================================================
+Milotic about to attack Corviknight with Muddy Water
+33 possible spa EVs for Milotic
+532 possible relevant spd spreads for Corviknight
+Milotic just attacked Corviknight with Muddy Water
+33 possible spa EVs for Milotic
+532 possible relevant spd spreads for Corviknight
+=======================================================================================
+=======================================================================================
+Milotic about to attack Tyranitar-Mega with Muddy Water
+33 possible spa EVs for Milotic
+165 possible relevant spd spreads for Tyranitar-Mega
+Milotic just attacked Tyranitar-Mega with Muddy Water
+33 possible spa EVs for Milotic
+132 possible relevant spd spreads for Tyranitar-Mega
+=======================================================================================
+=======================================================================================
+Gholdengo about to heal 1/16 HP
+17 possible HP EVs for Gholdengo
+Gholdengo just healed 1/16 HP
+15 possible HP EVs for Gholdengo
+=======================================================================================
+=======================================================================================
+Milotic about to heal 1/16 HP
+30 possible HP EVs for Milotic
+Milotic just healed 1/16 HP
+27 possible HP EVs for Milotic
+=======================================================================================
+=======================================================================================
+Tyranitar-Mega about to heal 1/16 HP
+4 possible HP EVs for Tyranitar-Mega
+Tyranitar-Mega just healed 1/16 HP
+4 possible HP EVs for Tyranitar-Mega
+=======================================================================================
+=======================================================================================
+Excadrill about to attack Milotic with Rock Slide
+33 possible atk EVs for Excadrill
+442 possible relevant def spreads for Milotic
+Excadrill just attacked Milotic with Rock Slide
+33 possible atk EVs for Excadrill
+442 possible relevant def spreads for Milotic
+=======================================================================================
+=======================================================================================
+Excadrill about to attack Gholdengo with Rock Slide
+33 possible atk EVs for Excadrill
+417 possible relevant def spreads for Gholdengo
+Excadrill just attacked Gholdengo with Rock Slide
+33 possible atk EVs for Excadrill
+164 possible relevant def spreads for Gholdengo
+=======================================================================================
+=======================================================================================
+Tyranitar-Mega about to attack Gholdengo with Knock Off
+33 possible atk EVs for Tyranitar-Mega
+164 possible relevant def spreads for Gholdengo
+Tyranitar-Mega just attacked Gholdengo with Knock Off
+33 possible atk EVs for Tyranitar-Mega
+164 possible relevant def spreads for Gholdengo
+=======================================================================================
+=======================================================================================
+Milotic about to attack Excadrill with Muddy Water
+33 possible spa EVs for Milotic
+1089 possible relevant spd spreads for Excadrill
+Milotic just attacked Excadrill with Muddy Water
+33 possible spa EVs for Milotic
+607 possible relevant spd spreads for Excadrill
+=======================================================================================
+=======================================================================================
+Milotic about to attack Tyranitar-Mega with Muddy Water
+33 possible spa EVs for Milotic
+132 possible relevant spd spreads for Tyranitar-Mega
+Milotic just attacked Tyranitar-Mega with Muddy Water
+33 possible spa EVs for Milotic
+132 possible relevant spd spreads for Tyranitar-Mega
+=======================================================================================
+=======================================================================================
+Tyranitar-Mega about to attack Rillaboom with Knock Off
+33 possible atk EVs for Tyranitar-Mega
+528 possible relevant def spreads for Rillaboom
+Tyranitar-Mega just attacked Rillaboom with Knock Off
+33 possible atk EVs for Tyranitar-Mega
+323 possible relevant def spreads for Rillaboom
+=======================================================================================
+=======================================================================================
+Rillaboom about to attack Tyranitar-Mega with Wood Hammer
+33 possible atk EVs for Rillaboom
+104 possible relevant def spreads for Tyranitar-Mega
+16 possible HP EVs for Rillaboom
+Rillaboom just attacked Tyranitar-Mega with Wood Hammer
+33 possible atk EVs for Rillaboom
+104 possible relevant def spreads for Tyranitar-Mega
+7 possible HP EVs for Rillaboom
+=======================================================================================
+=======================================================================================
+Excadrill about to heal 1/16 HP
+23 possible HP EVs for Excadrill
+Excadrill just healed 1/16 HP
+21 possible HP EVs for Excadrill
+=======================================================================================
+=======================================================================================
+Rillaboom about to heal 1/16 HP
+7 possible HP EVs for Rillaboom
+Rillaboom just healed 1/16 HP
+7 possible HP EVs for Rillaboom
+=======================================================================================
+=======================================================================================
+Milotic about to heal 1/16 HP
+27 possible HP EVs for Milotic
+Milotic just healed 1/16 HP
+27 possible HP EVs for Milotic
+=======================================================================================
+=======================================================================================
+Indeedee about to attack Milotic with Expanding Force
+33 possible spa EVs for Indeedee
+891 possible relevant spd spreads for Milotic
+Indeedee just attacked Milotic with Expanding Force
+33 possible spa EVs for Indeedee
+657 possible relevant spd spreads for Milotic
+=======================================================================================
+=======================================================================================
+Indeedee about to attack Rillaboom with Expanding Force
+33 possible spa EVs for Indeedee
+231 possible relevant spd spreads for Rillaboom
+Indeedee just attacked Rillaboom with Expanding Force
+33 possible spa EVs for Indeedee
+201 possible relevant spd spreads for Rillaboom
+=======================================================================================
+=======================================================================================
+Excadrill about to attack Milotic with Iron Head
+33 possible atk EVs for Excadrill
+434 possible relevant def spreads for Milotic
+Excadrill just attacked Milotic with Iron Head
+33 possible atk EVs for Excadrill
+434 possible relevant def spreads for Milotic
+=======================================================================================
+=======================================================================================
+Milotic about to attack Excadrill with Muddy Water
+33 possible spa EVs for Milotic
+541 possible relevant spd spreads for Excadrill
+Milotic just attacked Excadrill with Muddy Water
+33 possible spa EVs for Milotic
+541 possible relevant spd spreads for Excadrill
+=======================================================================================
+=======================================================================================
+Milotic about to attack Indeedee with Muddy Water
+33 possible spa EVs for Milotic
+1089 possible relevant spd spreads for Indeedee
+Milotic just attacked Indeedee with Muddy Water
+33 possible spa EVs for Milotic
+867 possible relevant spd spreads for Indeedee
+=======================================================================================
+=======================================================================================
+Indeedee about to attack Milotic with Expanding Force
+33 possible spa EVs for Indeedee
+657 possible relevant spd spreads for Milotic
+Indeedee just attacked Milotic with Expanding Force
+33 possible spa EVs for Indeedee
+657 possible relevant spd spreads for Milotic
+=======================================================================================
+=======================================================================================
+=======================================================================================
+33 possible atk EVs for Salamence
+33 possible spa EVs for Salamence
+1089 possible relevant def spreads for Salamence
+1089 possible relevant spd spreads for Salamence
+=======================================================================================
+33 possible atk EVs for Salamence-Mega
+33 possible spa EVs for Salamence-Mega
+1089 possible relevant def spreads for Salamence-Mega
+1089 possible relevant spd spreads for Salamence-Mega
+=======================================================================================
+33 possible atk EVs for Tyranitar
+33 possible spa EVs for Tyranitar
+104 possible relevant def spreads for Tyranitar
+132 possible relevant spd spreads for Tyranitar
+=======================================================================================
+33 possible atk EVs for Tyranitar-Mega
+33 possible spa EVs for Tyranitar-Mega
+104 possible relevant def spreads for Tyranitar-Mega
+132 possible relevant spd spreads for Tyranitar-Mega
+=======================================================================================
+33 possible atk EVs for Corviknight
+33 possible spa EVs for Corviknight
+1089 possible relevant def spreads for Corviknight
+532 possible relevant spd spreads for Corviknight
+=======================================================================================
+33 possible atk EVs for Excadrill
+33 possible spa EVs for Excadrill
+693 possible relevant def spreads for Excadrill
+541 possible relevant spd spreads for Excadrill
+=======================================================================================
+33 possible atk EVs for Indeedee
+33 possible spa EVs for Indeedee
+957 possible relevant def spreads for Indeedee
+867 possible relevant spd spreads for Indeedee
+=======================================================================================
+33 possible atk EVs for Sneasler
+33 possible spa EVs for Sneasler
+1089 possible relevant def spreads for Sneasler
+1089 possible relevant spd spreads for Sneasler
+=======================================================================================

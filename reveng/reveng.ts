@@ -34,7 +34,7 @@ type OtsInfo = {
     nature: string
 }
 
-function totalDefensiveSpreadCount(mon: AugmentedMon, statName: 'spd' | 'def') {
+export function totalDefensiveSpreadCount(mon: AugmentedMon, statName: 'spd' | 'def') {
     return Array.from(mon.possibleBulkInvestment.values()).reduce((sum, fullBulkData) => sum + fullBulkData[statName].size, 0)
 }
 
