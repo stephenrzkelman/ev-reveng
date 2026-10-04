@@ -119,12 +119,11 @@ function getPossibleResHps(move: Move, attacker: Pokemon, defender: Pokemon, def
     return validResHps;
 }
 
-function recoil_findPossibleHpInvestments(attacker: AugmentedMon, recoilFactor: number, dmgRoll: number, possibleHpInvestments: Map<number, Set<number>>, targetHpPct: number){
-    let pokemon = attacker.pokemon;
+function recoil_findPossibleHpInvestments(attacker: AugmentedMon, recoilFactor: number, dmgRoll: number, possibleHpInvestments: Map<number, PossibleBulk>, targetHpPct: number){
     let validHpInvestments = new Map<number, Set<number>>();
-    for(const [hpEv, Hps] of possibleHpInvestments){
-        let maxHpOnSpread = calcStat(gen, 'hp', pokemon.species.baseStats.hp, pokemon.ivs.hp, hpEv, pokemon.level, pokemon.nature);
-        for(const hp of Hps){
+    for(const [hpEv, fullBulkData] of possibleHpInvestments){
+        let maxHpOnSpread = fullBulkData.totalHp;
+        for(const hp of fullBulkData.remainingHp){
             let recoilDamage = Math.max(1, Math.round(dmgRoll/recoilFactor));
             let postRecoilHp = Math.max(0, hp - recoilDamage);
             let postRecoilHpPct = postRecoilHp/maxHpOnSpread * 100;
@@ -163,10 +162,6 @@ export function move(
     let attackerNewPossibleHpEvs = new Map<number, Set<number>>();
     let attackerMon = attacker.pokemon;
     let defenderMon = defender.pokemon;
-    let attackerPossibleHpInvestments = new Map<number, Set<number>>();
-    for(const [hpEv, fullBulkData] of attacker.possibleBulkInvestment){
-        attackerPossibleHpInvestments.set(hpEv, fullBulkData.remainingHp);
-    }
     console.log("=======================================================================================")
     console.log(`${attackerMon.name} about to attack ${defenderMon.name} with ${move.name}`);
     console.log(`${attacker.possibleOffensiveInvestment[relevantAttackingStat].size} possible ${relevantAttackingStat} EVs for ${attackerMon.name}`);
@@ -207,7 +202,7 @@ export function move(
                     if (debug) console.log(validResHps);
                     if(hasRecoil){
                         for(const validResHp of validResHps){
-                            let recoil_possibleHpInvestments = recoil_findPossibleHpInvestments(attacker, recoilFactor!, defenderMon.originalCurHP - validResHp, attackerPossibleHpInvestments, targetAttackerHpPct!);
+                            let recoil_possibleHpInvestments = recoil_findPossibleHpInvestments(attacker, recoilFactor!, defenderMon.originalCurHP - validResHp, attacker.possibleBulkInvestment, targetAttackerHpPct!);
                             if(recoil_possibleHpInvestments.size === 0){
                                 validResHps.delete(validResHp);
                             }
@@ -265,7 +260,7 @@ export function heal(augmentedMon: AugmentedMon, targetHpPct: number, logHealAmt
     console.log(`${pokemon.name} about to heal 1/${2**logHealAmt} HP`);
     console.log(`${augmentedMon.possibleBulkInvestment.size} possible HP EVs for ${pokemon.name}`);
     for(const [hpEv, fullBulkData] of augmentedMon.possibleBulkInvestment){
-        let maxHpOnSpread = calcStat(gen, 'hp', pokemon.species.baseStats.hp, pokemon.ivs.hp, hpEv, pokemon.level, pokemon.nature);
+        let maxHpOnSpread = fullBulkData.totalHp;
         let healAmount = maxHpOnSpread >> logHealAmt;
         let newPossibleHps = new Set<number>();
         let Hps = fullBulkData.remainingHp;
@@ -294,7 +289,7 @@ export function selfdmg(augmentedMon: AugmentedMon, targetHpPct: number, selfDmg
     console.log(`${pokemon.name} about to do 1/${selfDmgFactor} HP self-damage`);
     console.log(`${augmentedMon.possibleBulkInvestment.size} possible HP EVs for ${pokemon.name}`);
     for(const [hpEv, fullBulkData] of augmentedMon.possibleBulkInvestment){
-        let maxHpOnSpread = calcStat(gen, 'hp', pokemon.species.baseStats.hp, pokemon.ivs.hp, hpEv, pokemon.level, pokemon.nature);
+        let maxHpOnSpread = fullBulkData.totalHp;
         let selfDmgAmt = Math.floor(maxHpOnSpread / selfDmgFactor);
         let newPossibleHps = new Set<number>();
         let Hps = fullBulkData.remainingHp;
@@ -325,8 +320,7 @@ function resetTeam(team: Record<string, AugmentedMon>){
     for(const [_, fullData] of Object.entries(team)){
         let pokemon = fullData.pokemon;
         for(const [hpEv, fullBulkData] of fullData.possibleBulkInvestment){
-            let maxHpOnSpread = calcStat(gen, 'hp', pokemon.species.baseStats.hp, pokemon.ivs.hp, hpEv, pokemon.level, pokemon.nature);
-            fullBulkData.remainingHp = new Set([maxHpOnSpread]);
+            fullBulkData.remainingHp = new Set([fullBulkData.totalHp]);
         }
         pokemon.boosts = {hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0};
     }
