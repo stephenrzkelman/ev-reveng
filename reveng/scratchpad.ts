@@ -7,6 +7,7 @@ import { Field } from "../calc/src";
 import { Weather } from '@pkmn/dex';
 import type * as I from '../calc/src/data';
 import { calcStat } from '../calc/src';
+import { AugmentedMon } from './reveng';
 
 const gen = Generations.get(0);
 const boardState = new Field(
@@ -72,7 +73,7 @@ var team1 = {
                 nature: 'Jolly',
             }
         ),
-    "Chomp": new Pokemon(
+    "Chomp": new AugmentedMon(new Pokemon(
             gen, "Garchomp",
             {
                 level: 50,
@@ -81,7 +82,7 @@ var team1 = {
                 nature: 'Jolly',
                 evs: {atk: 0}
             }
-        ),
+        )),
     "Kingambit":new Pokemon(
         gen, "Kingambit",
         {
@@ -137,19 +138,23 @@ var team2 = {
             nature: 'Sassy',
             evs: {hp: 31, def: 15}
         }),
-    "Gengar": new Pokemon(gen, "Gengar-Mega", {
+    "Gengar": new AugmentedMon(new Pokemon(gen, "Gengar-Mega", {
             level: 50,
             ability: 'Shadow Tag',
             item: 'Gengarite',
             nature: 'Modest'
-        })
+        }))
 }
 
-team1.Chomp.boosts.atk -= 1;
+team1.Chomp.pokemon.boosts.atk -= 1;
 console.log(calculateChampions(
     gen,
-    team1.Chomp,
+    team1.Chomp.pokemon,
     team2.Incin,
     new Move(gen, 'Stomping Tantrum'),
     boardState
 ).damage)
+
+
+team2.Gengar.linkSpreads(team1.Chomp);
+console.log(team2.Gengar.pokemon.boosts);

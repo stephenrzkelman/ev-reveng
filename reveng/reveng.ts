@@ -84,6 +84,7 @@ export class AugmentedMon{
     linkSpreads(otherMon: AugmentedMon) {
         this.possibleBulkInvestment = otherMon.possibleBulkInvestment;
         this.possibleOffensiveInvestment = otherMon.possibleOffensiveInvestment;
+        this.pokemon.boosts = otherMon.pokemon.boosts;
     }
 }
 
