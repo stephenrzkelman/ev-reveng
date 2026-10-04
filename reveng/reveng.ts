@@ -80,6 +80,11 @@ export class AugmentedMon{
             });
         }
     }
+
+    linkSpreads(otherMon: AugmentedMon) {
+        this.possibleBulkInvestment = otherMon.possibleBulkInvestment;
+        this.possibleOffensiveInvestment = otherMon.possibleOffensiveInvestment;
+    }
 }
 
 function getPossibleResHps(move: Move, attacker: Pokemon, defender: Pokemon, defenderTotalHp:number, targetHpPct: number, field:Field, debug?: boolean){
