@@ -1,9 +1,8 @@
 import {calculateChampions} from '../calc/src/mechanics/champions';
 import { Generations } from "../calc/src/data";
-import { Dex, StatsTable, Weather } from '@pkmn/dex';
+import { StatsTable, AbilityName, ItemName } from '@pkmn/dex';
 import { calcStat, Pokemon, Move, Field } from "../calc/src";
 import { Side } from '../calc/src';
-import type * as I from '../calc/src/data';
 
 export const gen = Generations.get(0);
 
@@ -325,13 +324,22 @@ export function selfdmg(augmentedMon: AugmentedMon, targetHpPct: number, selfDmg
     console.log("=======================================================================================")
 }
 
-function resetTeam(team: Record<string, AugmentedMon>){
+export function swapReset(mon: AugmentedMon) {
+    mon.pokemon.boosts = {hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0};
+    mon.pokemon.ability = mon.otsInfo.ability as AbilityName;
+}
+
+export function fullReset(mon: AugmentedMon) {
+    swapReset(mon);
+    for(const [_, fullBulkData] of mon.possibleBulkInvestment){
+        fullBulkData.remainingHp = new Set([fullBulkData.totalHp]);
+    }
+    mon.pokemon.item = mon.otsInfo.item as ItemName;
+}
+
+export function resetTeam(team: Record<string, AugmentedMon>){
     for(const [_, fullData] of Object.entries(team)){
-        let pokemon = fullData.pokemon;
-        for(const [hpEv, fullBulkData] of fullData.possibleBulkInvestment){
-            fullBulkData.remainingHp = new Set([fullBulkData.totalHp]);
-        }
-        pokemon.boosts = {hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0};
+        fullReset(fullData);
     }
 }
 
