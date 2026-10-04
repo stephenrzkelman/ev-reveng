@@ -134,4 +134,4 @@ export let move_shortnames = {
     Kowtow : new Move(gen, 'Kowtow Cleave'),
     EForce : new Move(gen, 'Expanding Force'),
     HVoice : new Move(gen, 'Hyper Voice')
-} 
+}
