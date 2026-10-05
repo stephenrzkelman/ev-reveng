@@ -283,16 +283,202 @@ Indeedee just attacked Milotic with Expanding Force
 657 possible relevant spd spreads for Milotic
 =======================================================================================
 =======================================================================================
+Tyranitar about to attack Staraptor with Knock Off
+33 possible atk EVs for Tyranitar
+159 possible relevant def spreads for Staraptor
+Tyranitar just attacked Staraptor with Knock Off
+33 possible atk EVs for Tyranitar
+123 possible relevant def spreads for Staraptor
+=======================================================================================
+=======================================================================================
+Rillaboom about to attack Tyranitar with Wood Hammer
+33 possible atk EVs for Rillaboom
+104 possible relevant def spreads for Tyranitar
+7 possible HP EVs for Rillaboom
+Rillaboom just attacked Tyranitar with Wood Hammer
+33 possible atk EVs for Rillaboom
+104 possible relevant def spreads for Tyranitar
+4 possible HP EVs for Rillaboom
+=======================================================================================
+=======================================================================================
+Indeedee about to do 1/16 HP self-damage
+29 possible HP EVs for Indeedee
+Indeedee just did 1/16 HP self-damage
+17 possible HP EVs for Indeedee
+=======================================================================================
+=======================================================================================
+Staraptor about to do 1/16 HP self-damage
+5 possible HP EVs for Staraptor
+Staraptor just did 1/16 HP self-damage
+4 possible HP EVs for Staraptor
+=======================================================================================
+=======================================================================================
+Rillaboom about to do 1/16 HP self-damage
+4 possible HP EVs for Rillaboom
+Rillaboom just did 1/16 HP self-damage
+4 possible HP EVs for Rillaboom
+=======================================================================================
+=======================================================================================
+Indeedee about to attack Rillaboom with Expanding Force
+33 possible spa EVs for Indeedee
+121 possible relevant spd spreads for Rillaboom
+Indeedee just attacked Rillaboom with Expanding Force
+33 possible spa EVs for Indeedee
+95 possible relevant spd spreads for Rillaboom
+=======================================================================================
+=======================================================================================
+Indeedee about to do 1/16 HP self-damage
+17 possible HP EVs for Indeedee
+Indeedee just did 1/16 HP self-damage
+17 possible HP EVs for Indeedee
+=======================================================================================
+=======================================================================================
+Salamence-Mega about to do 1/16 HP self-damage
+33 possible HP EVs for Salamence-Mega
+Salamence-Mega just did 1/16 HP self-damage
+17 possible HP EVs for Salamence-Mega
+=======================================================================================
+=======================================================================================
+Staraptor about to do 1/16 HP self-damage
+4 possible HP EVs for Staraptor
+Staraptor just did 1/16 HP self-damage
+3 possible HP EVs for Staraptor
+=======================================================================================
+=======================================================================================
+Indeedee about to attack Milotic with Expanding Force
+33 possible spa EVs for Indeedee
+657 possible relevant spd spreads for Milotic
+Indeedee just attacked Milotic with Expanding Force
+33 possible spa EVs for Indeedee
+628 possible relevant spd spreads for Milotic
+=======================================================================================
+=======================================================================================
+Indeedee about to attack Gholdengo with Expanding Force
+33 possible spa EVs for Indeedee
+429 possible relevant spd spreads for Gholdengo
+Indeedee just attacked Gholdengo with Expanding Force
+33 possible spa EVs for Indeedee
+403 possible relevant spd spreads for Gholdengo
+=======================================================================================
+=======================================================================================
+Milotic about to heal 1/4 HP
+25 possible HP EVs for Milotic
+Milotic just healed 1/4 HP
+7 possible HP EVs for Milotic
+=======================================================================================
+=======================================================================================
+Milotic about to attack Excadrill with Ice Beam
+33 possible spa EVs for Milotic
+541 possible relevant spd spreads for Excadrill
+Milotic just attacked Excadrill with Ice Beam
+33 possible spa EVs for Milotic
+442 possible relevant spd spreads for Excadrill
+=======================================================================================
+=======================================================================================
+Indeedee about to do 1/16 HP self-damage
+17 possible HP EVs for Indeedee
+Indeedee just did 1/16 HP self-damage
+15 possible HP EVs for Indeedee
+=======================================================================================
+=======================================================================================
+Milotic about to do 1/16 HP self-damage
+7 possible HP EVs for Milotic
+Milotic just did 1/16 HP self-damage
+4 possible HP EVs for Milotic
+=======================================================================================
+=======================================================================================
+Indeedee about to attack Staraptor with Expanding Force
+33 possible spa EVs for Indeedee
+99 possible relevant spd spreads for Staraptor
+Indeedee just attacked Staraptor with Expanding Force
+33 possible spa EVs for Indeedee
+99 possible relevant spd spreads for Staraptor
+=======================================================================================
+=======================================================================================
+Indeedee about to attack Gholdengo with Expanding Force
+33 possible spa EVs for Indeedee
+403 possible relevant spd spreads for Gholdengo
+Indeedee just attacked Gholdengo with Expanding Force
+33 possible spa EVs for Indeedee
+398 possible relevant spd spreads for Gholdengo
+=======================================================================================
+=======================================================================================
+Gholdengo about to attack Indeedee with Make It Rain
+33 possible spa EVs for Gholdengo
+467 possible relevant spd spreads for Indeedee
+Gholdengo just attacked Indeedee with Make It Rain
+33 possible spa EVs for Gholdengo
+239 possible relevant spd spreads for Indeedee
+=======================================================================================
+=======================================================================================
+Gholdengo about to do 1/10 HP self-damage
+13 possible HP EVs for Gholdengo
+Gholdengo just did 1/10 HP self-damage
+13 possible HP EVs for Gholdengo
+=======================================================================================
+=======================================================================================
+Indeedee about to do 1/16 HP self-damage
+10 possible HP EVs for Indeedee
+Indeedee just did 1/16 HP self-damage
+10 possible HP EVs for Indeedee
+=======================================================================================
+=======================================================================================
+Excadrill about to attack Milotic with High Horsepower
+33 possible atk EVs for Excadrill
+70 possible relevant def spreads for Milotic
+Excadrill just attacked Milotic with High Horsepower
+33 possible atk EVs for Excadrill
+70 possible relevant def spreads for Milotic
+=======================================================================================
+=======================================================================================
+Salamence-Mega about to attack Milotic with Hyper Voice
+33 possible spa EVs for Salamence-Mega
+98 possible relevant spd spreads for Milotic
+Salamence-Mega just attacked Milotic with Hyper Voice
+21 possible spa EVs for Salamence-Mega
+49 possible relevant spd spreads for Milotic
+=======================================================================================
+=======================================================================================
+Salamence-Mega about to attack Gholdengo with Hyper Voice
+21 possible spa EVs for Salamence-Mega
+398 possible relevant spd spreads for Gholdengo
+Salamence-Mega just attacked Gholdengo with Hyper Voice
+20 possible spa EVs for Salamence-Mega
+105 possible relevant spd spreads for Gholdengo
+=======================================================================================
+=======================================================================================
+Excadrill about to attack Milotic with Iron Head
+33 possible atk EVs for Excadrill
+70 possible relevant def spreads for Milotic
+Excadrill just attacked Milotic with Iron Head
+33 possible atk EVs for Excadrill
+70 possible relevant def spreads for Milotic
+=======================================================================================
+=======================================================================================
+Gholdengo about to attack Salamence-Mega with Shadow Ball
+33 possible spa EVs for Gholdengo
+561 possible relevant spd spreads for Salamence-Mega
+Gholdengo just attacked Salamence-Mega with Shadow Ball
+33 possible spa EVs for Gholdengo
+196 possible relevant spd spreads for Salamence-Mega
+=======================================================================================
+=======================================================================================
+Gholdengo about to do 1/10 HP self-damage
+12 possible HP EVs for Gholdengo
+Gholdengo just did 1/10 HP self-damage
+5 possible HP EVs for Gholdengo
+=======================================================================================
+=======================================================================================
 =======================================================================================
 33 possible atk EVs for Salamence
-33 possible spa EVs for Salamence
-1089 possible relevant def spreads for Salamence
-1089 possible relevant spd spreads for Salamence
+20 possible spa EVs for Salamence
+495 possible relevant def spreads for Salamence
+196 possible relevant spd spreads for Salamence
 =======================================================================================
 33 possible atk EVs for Salamence-Mega
-33 possible spa EVs for Salamence-Mega
-1089 possible relevant def spreads for Salamence-Mega
-1089 possible relevant spd spreads for Salamence-Mega
+20 possible spa EVs for Salamence-Mega
+495 possible relevant def spreads for Salamence-Mega
+196 possible relevant spd spreads for Salamence-Mega
 =======================================================================================
 33 possible atk EVs for Tyranitar
 33 possible spa EVs for Tyranitar
@@ -312,12 +498,12 @@ Indeedee just attacked Milotic with Expanding Force
 33 possible atk EVs for Excadrill
 33 possible spa EVs for Excadrill
 693 possible relevant def spreads for Excadrill
-541 possible relevant spd spreads for Excadrill
+442 possible relevant spd spreads for Excadrill
 =======================================================================================
 33 possible atk EVs for Indeedee
 33 possible spa EVs for Indeedee
-957 possible relevant def spreads for Indeedee
-867 possible relevant spd spreads for Indeedee
+330 possible relevant def spreads for Indeedee
+239 possible relevant spd spreads for Indeedee
 =======================================================================================
 33 possible atk EVs for Sneasler
 33 possible spa EVs for Sneasler

@@ -15,7 +15,7 @@ export var joeTeam = {
         'Salamence-Mega',
         {
             level: 50,
-            ability: 'Intimidate',
+            ability: 'Aerilate',
             item: 'Salamencite',
             nature: 'Timid',
         }

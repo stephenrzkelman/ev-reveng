@@ -1,4 +1,5 @@
 import { battleLog as t8g1 } from "./top8-match/game1";
+import { battleLog as t8g2 } from "./top8-match/game2";
 import { resetTeam, totalDefensiveSpreadCount } from "../../reveng";
 import { joeTeam } from "./joe-ots";
 import { lorenzoTeam } from "./top8-match/top8-opp-ots";
@@ -8,6 +9,10 @@ for(const event of t8g1){
 }
 resetTeam(joeTeam);
 resetTeam(lorenzoTeam);
+for(const event of t8g2){
+    event();
+}
+resetTeam(joeTeam);
 
 console.log("=======================================================================================");
 console.log("=======================================================================================");
